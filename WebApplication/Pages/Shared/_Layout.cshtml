@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication.Services
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -22,7 +23,17 @@
                         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Профиль</a>
+                        @{
+                            var profileLabel = @AccountManagerService.isLoggedIn ? "Профиль" : "Вход";
+                            var profilePage = AccountManagerService.isLoggedIn ? "/Profile" : "/LoginPage";
+                        }
+                        <a class="nav-link text-dark" asp-area="" asp-page="@profilePage">
+
+                            @profileLabel
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/PlayerList">Список Игроков</a>
                     </li>
                 </ul>
             </div>

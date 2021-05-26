@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using WebApplication.Services;
 
 namespace WebApplication.Pages
 {
-    public class PrivacyModel : PageModel
+    public class ProfileModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<ProfileModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public ProfileModel(ILogger<ProfileModel> logger,
+            AccountManagerService accountManagerService)
         {
             _logger = logger;
         }

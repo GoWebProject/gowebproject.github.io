@@ -25,6 +25,7 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddServerSideBlazor();
             services.AddTransient<AccountManagerService>();
         }
 
@@ -48,8 +49,12 @@ namespace WebApplication
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapBlazorHub();
+            });
         }
     }
 }

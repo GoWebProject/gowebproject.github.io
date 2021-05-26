@@ -4,4 +4,16 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Update="Pages\LoginPage.razor">
+        <DependentUpon>LoginPage.cshtml</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Pages\LoginPage.cshtml.cs">
+        <DependentUpon>LoginPage.cshtml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

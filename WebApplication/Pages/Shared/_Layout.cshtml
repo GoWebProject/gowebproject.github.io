@@ -24,8 +24,8 @@
                     </li>
                     <li class="nav-item">
                         @{
-                            var profileLabel = @AccountManagerService.isLoggedIn ? "Профиль" : "Вход";
-                            var profilePage = AccountManagerService.isLoggedIn ? "/Profile" : "/LoginPage";
+                            var profileLabel = AccountManagerService.IsLoggedIn ? "Профиль" : "Вход";
+                            var profilePage = AccountManagerService.IsLoggedIn ? "/Profile" : "/LoginPage";
                         }
                         <a class="nav-link text-dark" asp-area="" asp-page="@profilePage">
 

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8j1kqz2JXLxSe4anvvfMZPOlg6jdubQ4ge6jfJRCJKmAbOHWWVqnc6QHpr59NR7jvXihmnXkHV0CizACFeiHXQ==",
+  "success": true,
+  "projectFilePath": "/home/gohan/WebstormProjects/gowebproject.github.io/WebApplication/WebApplication.csproj",
+  "expectedPackageFiles": [
+    "/home/gohan/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

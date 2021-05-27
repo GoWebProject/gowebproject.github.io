@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using MySql.Data.MySqlClient;
 
 namespace WebApplication.Models
@@ -10,7 +11,7 @@ namespace WebApplication.Models
 
         public DBManager()
         {
-            _mySqlConnection = new MySqlConnection(Environment.GetEnvironmentVariable("mainDB_credentials"));
+            _mySqlConnection = new MySqlConnection(ConfigurationManager.ConnectionStrings["mainDB_credentials"].ConnectionString);
             _mySqlDataAdapter = new MySqlDataAdapter();
             _mySqlConnection.Open();
         }

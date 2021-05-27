@@ -10,7 +10,7 @@ namespace WebApplication.Models
 
         public DBManager()
         {
-            _mySqlConnection = new MySqlConnection(Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb"));
+            _mySqlConnection = new MySqlConnection(Environment.GetEnvironmentVariable("mainDB_credentials"));
             _mySqlDataAdapter = new MySqlDataAdapter();
             _mySqlConnection.Open();
         }

@@ -1,5 +1,6 @@
-using System;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using WebApplication.Models;
 
 
 namespace WebApplication.Pages
@@ -8,12 +9,11 @@ namespace WebApplication.Pages
     {
         public void OnGet()
         {
-            
         }
 
-        public void OnSubmitListener(NavigationManager navigationManager)
+        protected bool OnSubmitListener(string login, string pwd)
         {
-            //TODO
+            return UserManager.GetUser(login, pwd) != null;
         }
     }
 }

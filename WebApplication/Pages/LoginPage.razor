@@ -19,7 +19,7 @@
 
     void OnSubmitButtonClick()
     {
-        if (OnSubmitListener(_text, _pwd))
+        if (!OnSubmitListener(_text, _pwd))
         {
             JsRuntime.InvokeVoidAsync("alert", "Неправильный логин или пароль!");
         }

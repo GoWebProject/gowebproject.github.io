@@ -10,9 +10,9 @@ namespace WebApplication.Models
             FullName = fullName;
         }
 
-        string Username { get; set; }
-        string PasswordHash { get; set; }
-        string Email { get; set; }
-        string FullName { get; set; }
+        public string Username { get; set; }
+        public string PasswordHash { get; set; }
+        public string Email { get; set; }
+        public string FullName { get; set; }
     }
 }

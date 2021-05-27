@@ -7,11 +7,19 @@
 
 <form>
     <label for="login">Логин/Почта:</label><br>
-    <input @bind="_text" type="text" id="login"><br><br>
+    <input style="width: auto; " class="form-control input_user" @bind="_text" type="text" id="login"><br><br>
     <label for="password">Пароль:</label><br>
-    <input @bind="_pwd" type="password" id="password"><br><br>
+    <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
+    <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Войти</button>
 </form>
-<button @onclick="OnSubmitButtonClick">Войти</button>
+<div class="mt-4">
+    <div class="d-flex links">
+        Нет аккаунта? <a href="#" class="ml-2">Регистрация</a>
+    </div>
+    <div class="d-flex links">
+        <a href="#">Забыли пароль?</a>
+    </div>
+</div>
 
 @code{
     private string _text;

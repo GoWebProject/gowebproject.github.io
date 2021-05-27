@@ -18,7 +18,7 @@ namespace WebApplication.Pages
             var connectionString = "Server=127.0.0.1; Port=54855; Database=localdb; Uid=azure; Pwd=6#vWHD_$";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            jsRuntime.InvokeVoidAsync("alert", conn.State.ToString());
+            jsRuntime.InvokeVoidAsync("alert", conn.State.ToString() );
             jsRuntime.InvokeVoidAsync("alert", Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb"));
             conn.Close();
         }

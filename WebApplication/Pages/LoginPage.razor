@@ -3,20 +3,26 @@
 @page "/LoginPage"
 @using Microsoft.JSInterop;
 @inject IJSRuntime JsRuntime;
-@inject NavigationManager NavManager;
 @inherits LoginPageModel
-
-@code{
-    void OnSubmitButtonClick()
-    {
-        OnSubmitListener(NavManager, JsRuntime);
-    }
-}
 
 <form>
     <label for="login">Логин/Почта:</label><br>
-    <input type="text" id="login"><br><br>
+    <input @bind="_text" type="text" id="login"><br><br>
     <label for="password">Пароль:</label><br>
-    <input type="password" id="password"><br><br>
+    <input @bind="_pwd" type="password" id="password"><br><br>
 </form>
 <button @onclick="OnSubmitButtonClick">Войти</button>
+
+@code{
+    private string _text;
+    private string _pwd;
+
+    void OnSubmitButtonClick()
+    {
+        if (OnSubmitListener(_text, _pwd))
+        {
+            JsRuntime.InvokeVoidAsync("alert", "Неправильный логин или пароль!");
+        }
+    }
+
+}

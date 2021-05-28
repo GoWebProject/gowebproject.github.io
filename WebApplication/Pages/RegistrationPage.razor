@@ -2,43 +2,54 @@
 @using Microsoft.AspNetCore.Components.Web;
 @page "/RegistrationPage"
 @using Microsoft.JSInterop;
+@using WebApplication.Services
 @inject IJSRuntime JsRuntime;
 @inherits RegistrationPageModel
+@inject AccountManagerService _accountManager
+@inject NavigationManager _navigationManager
 
 <form>
     <label for="name">Имя пользователя:</label><br>
-    <input style="width: auto; @(madeAttempt && username.Length==0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username"><br><br>
+    <input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username"><br><br>
     <label for="secondname">Полное Имя:</label><br>
-    <input style="width: auto;@(madeAttempt && fullname.Length==0 ? "border-color:red;" : "");"  class="form-control input_user" @bind="fullname" type="text" id="fullname"><br><br>
+    <input style="width: auto;@(madeAttempt && fullname.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="fullname" type="text" id="fullname"><br><br>
     <label for="login">Почта:</label><br>
-    <input style="width: auto; @(madeAttempt && email.Length==0 &&email.Contains('@')? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email"><br><br>
+    <input style="width: auto; @(madeAttempt && email.Length == 0 && email.Contains('@') ? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email"><br><br>
     <label for="password">Пароль:</label><br>
-    <input style="width: auto; @(madeAttempt && _pwd.Length==0 ? "border-color:red;" : "");" class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
+    <input style="width: auto; @(madeAttempt && _pwd.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
 </form>
 <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Зарегистрироваться</button>
 
 
 @code{
     private bool madeAttempt = false;
-    private string username="";
+    private string username = "";
     private string fullname = "";
     private string email = "";
     private string _pwd = "";
-
+    
+    protected override Task OnInitializedAsync()
+    {
+        if (_accountManager.LoggedUser != null)
+        {
+            _navigationManager.NavigateTo("/Profile");
+        }
+        return base.OnInitializedAsync();
+    }
+    
     void OnSubmitButtonClick()
     {
-        if (!OnSubmitListener(username, fullname, email, _pwd))
+        if (OnSubmitListener(username, fullname, email, _pwd)) return;
+        if (!email.Contains('@') && (email.Length > 0))
         {
-            if (!email.Contains('@')&&(email.Length>0))
-            {
-                JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
-            }
-            else {
-                JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
-            }
-
-            madeAttempt = true;
+            JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
         }
+        else
+        {
+            JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
+        }
+
+        madeAttempt = true;
     }
 
 }

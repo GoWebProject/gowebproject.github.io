@@ -1,4 +1,6 @@
 ﻿@using WebApplication.Services
+@inject AccountManagerService _accountManagerService
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +26,8 @@
                     </li>
                     <li class="nav-item">
                         @{
-                            var profileLabel = AccountManagerService.IsLoggedIn ? "Профиль" : "Вход";
-                            var profilePage = AccountManagerService.IsLoggedIn ? "/Profile" : "/LoginPage";
+                            var profileLabel = _accountManagerService.LoggedUser!=null ? "Профиль" : "Вход";
+                            var profilePage = _accountManagerService.LoggedUser!=null ? "/Profile" : "/LoginPage";
                         }
                         <a class="nav-link text-dark" asp-area="" asp-page="@profilePage">
 

@@ -11,12 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Pages\LoginPage.cshtml.cs">
-        <DependentUpon>LoginPage.cshtml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="MySql.Data" Version="8.0.25" />
     </ItemGroup>
 

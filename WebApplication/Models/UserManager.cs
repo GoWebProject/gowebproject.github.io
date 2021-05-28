@@ -10,7 +10,7 @@ namespace WebApplication.Models
         public static User GetUser(string username, string pwd)
         {
             var dbase = new DBManager();
-            var reader = dbase.GetReader($"select username from accounts where username='{username}'"); //TODO: SQL INJECTION
+            var reader = dbase.GetReader($"select username,email,pwd,full_name,salt from accounts where username='{username}'"); //TODO: SQL INJECTION
             User user = null;
             if (reader.Read())
             {

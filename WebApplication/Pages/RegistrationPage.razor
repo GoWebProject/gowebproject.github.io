@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web;
+@page "/RegistrationPage"
+@using Microsoft.JSInterop;
+@inject IJSRuntime JsRuntime;
+@inherits RegistrationPageModel
+
+<form>
+    <label for="name">Имя пользователя:</label><br>
+    <input style="width: auto; " class="form-control input_user" @bind="username" type="text" id="username"><br><br>
+    <label for="secondname">Полное Имя:</label><br>
+    <input style="width: auto; " class="form-control input_user" @bind="fullname" type="text" id="fullname"><br><br>
+    <label for="login">Почта:</label><br>
+    <input style="width: auto; " class="form-control input_user" @bind="email" type="text" id="email"><br><br>
+    <label for="password">Пароль:</label><br>
+    <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
+    <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Зарегистрироваться</button>
+</form>
+
+
+@code{
+    private string username;
+    private string fullname;
+    private string email;
+    private string _pwd;
+
+    void OnSubmitButtonClick()
+    {
+        if (!OnSubmitListener(username, fullname, email, _pwd))
+        {
+
+            JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
+        }
+    }
+
+}

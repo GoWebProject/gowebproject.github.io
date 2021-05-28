@@ -19,7 +19,7 @@ namespace WebApplication.Pages
 
         protected bool OnSubmitListener(string username,string fullname,string email, string _pwd)
         {
-            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0))
+            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0)&&(email.Contains('@')))
             {
                 return UserManager.CreateUser(new User(username, email, _pwd, fullname));
             }

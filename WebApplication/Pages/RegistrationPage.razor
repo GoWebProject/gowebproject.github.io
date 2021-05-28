@@ -7,18 +7,19 @@
 
 <form>
     <label for="name">Имя пользователя:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="username" type="text" id="username"><br><br>
+    <input style="width: auto; @(madeAttempt && username.Length==0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username"><br><br>
     <label for="secondname">Полное Имя:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="fullname" type="text" id="fullname"><br><br>
+    <input style="width: auto;@(madeAttempt && fullname.Length==0 ? "border-color:red;" : "");"  class="form-control input_user" @bind="fullname" type="text" id="fullname"><br><br>
     <label for="login">Почта:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="email" type="text" id="email"><br><br>
+    <input style="width: auto; @(madeAttempt && email.Length==0 &&email.Contains('@')? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email"><br><br>
     <label for="password">Пароль:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
+    <input style="width: auto; @(madeAttempt && _pwd.Length==0 ? "border-color:red;" : "");" class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
 </form>
 <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Зарегистрироваться</button>
 
 
 @code{
+    private bool madeAttempt = false;
     private string username="";
     private string fullname = "";
     private string email = "";
@@ -28,8 +29,15 @@
     {
         if (!OnSubmitListener(username, fullname, email, _pwd))
         {
+            if (!email.Contains('@')&&(email.Length>0))
+            {
+                JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
+            }
+            else {
+                JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
+            }
 
-            JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
+            madeAttempt = true;
         }
     }
 

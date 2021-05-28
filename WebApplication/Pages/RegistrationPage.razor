@@ -14,15 +14,15 @@
     <input style="width: auto; " class="form-control input_user" @bind="email" type="text" id="email"><br><br>
     <label for="password">Пароль:</label><br>
     <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
-    <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Зарегистрироваться</button>
 </form>
+<button class="btn btn-primary" @onclick="OnSubmitButtonClick">Зарегистрироваться</button>
 
 
 @code{
-    private string username;
-    private string fullname;
-    private string email;
-    private string _pwd;
+    private string username="";
+    private string fullname = "";
+    private string email = "";
+    private string _pwd = "";
 
     void OnSubmitButtonClick()
     {

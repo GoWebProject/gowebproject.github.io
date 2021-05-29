@@ -1,13 +1,15 @@
 @using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web;
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
 @page "/LoginPage"
 @using Microsoft.JSInterop;
+@using WebApplication.Models
 @inject IJSRuntime JsRuntime;
-@inherits LoginPageModel
+@inject NavigationManager _navigationManager;
 
 <form>
     <label for="login">Логин/Почта:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="_text" type="text" id="login"><br><br>
+    <input style="width: auto; " class="form-control input_user" @bind="_login" type="text" id="login"><br><br>
     <label for="password">Пароль:</label><br>
     <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
 </form>
@@ -22,14 +24,19 @@
 </div>
 
 @code{
-    private string _text;
+    private string _login;
     private string _pwd;
 
-    void OnSubmitButtonClick()
+    private void OnSubmitButtonClick()
     {
-        if (!OnSubmitListener(_text, _pwd))
+        var user = UserManager.GetUser(_login, _pwd);
+        if (user == null)
         {
             JsRuntime.InvokeVoidAsync("alert", "Неправильный логин или пароль!");
+        }
+        else
+        {
+            _navigationManager.NavigateTo("/Account/Profile");
         }
     }
 

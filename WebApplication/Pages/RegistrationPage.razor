@@ -29,15 +29,23 @@
     {
         if (!OnSubmitListener(username, fullname, email, _pwd))
         {
-            if (!email.Contains('@')&&(email.Length>0))
+            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
             {
-                JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
+                JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");
             }
-            else {
-                JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
-            }
+            else
+            {
+                if (!email.Contains('@') && (email.Length > 0))
+                {
+                    JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
+                }
+                else
+                {
+                    JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
+                }
 
-            madeAttempt = true;
+                madeAttempt = true;
+            }
         }
     }
 

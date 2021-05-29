@@ -1,13 +1,11 @@
 @using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web;
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Identity
 @page "/LoginPage"
 @using Microsoft.JSInterop;
 @using WebApplication.Models
-@using WebApplication.Services
 @inject IJSRuntime JsRuntime;
 @inject NavigationManager _navigationManager;
-@inject AccountManagerService _accountManager;
 
 <form>
     <label for="login">Логин/Почта:</label><br>
@@ -29,25 +27,16 @@
     private string _login;
     private string _pwd;
 
-    protected override Task OnInitializedAsync()
-    {
-        if (_accountManager.LoggedUser != null)
-        {
-            _navigationManager.NavigateTo("/Profile");
-        }
-        return base.OnInitializedAsync();
-    }
-
     private void OnSubmitButtonClick()
     {
-        _accountManager.LoggedUser = UserManager.GetUser(_login, _pwd);
-        if (_accountManager.LoggedUser == null)
+        var user = UserManager.GetUser(_login, _pwd);
+        if (user == null)
         {
             JsRuntime.InvokeVoidAsync("alert", "Неправильный логин или пароль!");
         }
         else
         {
-            _navigationManager.NavigateTo("/Profile");
+            _navigationManager.NavigateTo("/Account/Profile");
         }
     }
 

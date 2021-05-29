@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using WebApplication.Services;
 
 namespace WebApplication.Pages
 {
@@ -8,8 +7,7 @@ namespace WebApplication.Pages
     {
         private readonly ILogger<ProfileModel> _logger;
 
-        public ProfileModel(ILogger<ProfileModel> logger,
-            AccountManagerService accountManagerService)
+        public ProfileModel(ILogger<ProfileModel> logger)
         {
             _logger = logger;
         }

@@ -10,7 +10,9 @@ namespace WebApplication.Models
         public static User GetUser(string username, string pwd)
         {
             var dbase = new DBManager();
-            var reader = dbase.GetReader($"select username,email,pwd,full_name,salt from accounts where username='{username}'"); //TODO: SQL INJECTION
+            var reader =
+                dbase.GetReader(
+                    $"select username,email,pwd,full_name,salt from accounts where username='{username}'"); //TODO: SQL INJECTION
             User user = null;
             if (reader.Read())
             {
@@ -20,6 +22,7 @@ namespace WebApplication.Models
                     user = null;
                 }
             }
+
             dbase.Close();
             return user;
         }
@@ -54,7 +57,29 @@ namespace WebApplication.Models
             var dbase = new DBManager();
             if (UserExists(user.Username)) return false;
             var (key, value) = GenerateHash(user.PasswordHash);
-            dbase.InsertCommand($"insert into accounts value('{user.Username}','{user.Email}','{key}','{user.FullName}','{value}')");
+            dbase.InsertCommand(
+                $"insert into accounts value('{user.Username}','{user.Email}','{key}','{user.FullName}','{value}')");
+            dbase.Close();
+            return true;
+        }
+
+        public static bool ChangeUser(string oldUsername, User user)
+        {
+            var dbase = new DBManager();
+            dbase.InsertCommand(
+                $"update accounts set username='{user.Username}', email='{user.Email}',full_name='{user.FullName}' where username={oldUsername}");
+            dbase.Close();
+            return true;
+        }
+
+        public static bool ChangeUserPassword(string username, string pwd)
+        {
+            var dbase = new DBManager();
+            var reader = dbase.GetReader($"select salt from accounts where username='{username}'");
+            reader.Read();
+            var salt = reader.GetString(0);
+            var hash = GenerateHashFromSalt(pwd, salt);
+            dbase.InsertCommand($"update accounts set pwd='{hash}' where username={username}");
             dbase.Close();
             return true;
         }

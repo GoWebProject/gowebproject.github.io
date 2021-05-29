@@ -1,7 +1,4 @@
-﻿@using WebApplication.Services
-@inject AccountManagerService _accountManagerService
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -26,10 +23,10 @@
                     </li>
                     <li class="nav-item">
                         @{
-                            var profileLabel = _accountManagerService.LoggedUser!=null ? "Профиль" : "Вход";
-                            var profilePage = _accountManagerService.LoggedUser!=null ? "/Profile" : "/LoginPage";
+                            var profileLabel = User.Identity != null ? "Профиль" : "Вход";
+                            var profilePage = User.Identity != null ? "Account/Profile/" : "Account/LoginPage";
                         }
-                        <a class="nav-link text-dark" asp-area="" asp-page="@profilePage">
+                        <a class="nav-link text-dark" href="@profilePage">
 
                             @profileLabel
                         </a>

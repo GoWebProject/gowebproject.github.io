@@ -1,5 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication.Models
+@using Microsoft.JSInterop
+<!DOCTYPE html>
 <html lang="en">
+<base href="~/"/>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -23,8 +26,9 @@
                     </li>
                     <li class="nav-item">
                         @{
-                            var profileLabel = User.Identity != null ? "Профиль" : "Вход";
-                            var profilePage = User.Identity != null ? "Account/Profile/" : "Account/LoginPage";
+                            var isLoggedIn = Context.Request.Cookies.ContainsKey("username");
+                            var profileLabel = isLoggedIn ? "Профиль" : "Вход";
+                            var profilePage =  isLoggedIn ? "Account/Profile/" : "Account/LoginPage";
                         }
                         <a class="nav-link text-dark" href="@profilePage">
 

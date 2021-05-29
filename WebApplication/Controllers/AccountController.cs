@@ -6,19 +6,19 @@ namespace WebApplication.Controllers
     {
         public IActionResult Profile()
         {
-            if (User.Identity == null) LoginPage();
+            if (!Request.Cookies.ContainsKey("username")) LoginPage();
             return View("~/Pages/Profile.cshtml");
         }
 
         public IActionResult RegistrationPage()
         {
-            if (User.Identity != null) Profile();
+            if (Request.Cookies.ContainsKey("username")) Profile();
             return View("~/Pages/RegistrationPage.cshtml");
         }
 
         public IActionResult LoginPage()
         {
-            if (User.Identity != null) Profile();
+            if (Request.Cookies.ContainsKey("username")) Profile();
             return View("~/Pages/LoginPage.cshtml");
         }
     }

@@ -90,7 +90,7 @@ namespace WebApplication.Models
             if (UserExists(user.Username)) return false;
             var (key, value) = GenerateHash(user.PasswordHash);
             dbase.InsertCommand(
-                $"insert into accounts value('{user.Username}','{user.Email}','{key}','{user.FullName}','{value}',{user.RFG_rating},'{user.Misc_rating})'");
+                $"insert into accounts value('{user.Username}','{user.Email}','{key}','{user.FullName}','{value}',{user.RFG_rating},'{user.Misc_rating}')");
             dbase.Close();
             return true;
         }

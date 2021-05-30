@@ -24,29 +24,35 @@
     private string fullname = "";
     private string email = "";
     private string _pwd = "";
-    
+
     void OnSubmitButtonClick()
     {
-        if (!CheckCorrect()) return;
-        if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
+        if (!CheckCorrect())
         {
-            JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");
-        }
-        else
-        {
-            if (!email.Contains('@') && (email.Length > 0))
+            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
             {
-                JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
+                JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");
             }
             else
             {
-                JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
-            }
+                if (!email.Contains('@') && (email.Length > 0))
+                {
+                    JsRuntime.InvokeVoidAsync("alert", "Email должен сожержать знак @");
+                }
+                else
+                {
+                    JsRuntime.InvokeVoidAsync("alert", "Заполните все поля!");
+                }
 
-            madeAttempt = true;
+                madeAttempt = true;
+            }
+        }
+        else
+        {
+            _navigationManager.NavigateTo("/Account/Profile", true);
         }
     }
-    
+
     private bool CheckCorrect()
     {
         if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))

@@ -22,9 +22,7 @@
     </div>
 </form>
 <div class="mt-4">
-    <div class="d-flex links">
-        Нет аккаунта? <a href="/Account/Registration" class="ml-2">Сменить пароль</a>
-    </div>
+    <a href="/Account/Registration" class="ml-2">Сменить пароль</a>
 </div>
 <button class="btn btn-primary" @onclick="OnSubmitButtonClick">@buttonLabel</button>
 
@@ -35,7 +33,6 @@
     private string old_username = "";
     private string fullname = "";
     private string email = "";
-    private string _pwd = "";
     private string buttonLabel = "Изменить данные";
     private string rating = "";
     private string misc_rating = "";
@@ -52,23 +49,28 @@
         email = user.Email;
         rating = user.RFG_rating;
         misc_rating = user.Misc_rating;
+        JsRuntime.InvokeVoidAsync("alert", user.FullName);
         return base.OnAfterRenderAsync(firstRender);
     }
 
     void OnSubmitButtonClick()
     {
+        JsRuntime.InvokeVoidAsync("alert", "Метка 1");
         if (disable_fields)
         {
+            JsRuntime.InvokeVoidAsync("alert", "Метка 2");
             disable_fields = false;
             buttonLabel = "Сохранить изменения";
         }
 
         else
         {
+            JsRuntime.InvokeVoidAsync("alert", "Метка 3");
             var change_user = false;
-            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
+            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0)  && (email.Contains('@')))
             {
-                change_user = UserManager.ChangeUser(old_username, new User(username, email, _pwd, fullname));
+                JsRuntime.InvokeVoidAsync("alert", "Метка 4");
+                change_user = UserManager.ChangeUser(old_username, new User(username, email, "", fullname));
                 if (!change_user)
                 {
                     JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");

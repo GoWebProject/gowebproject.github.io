@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebApplication.Pages.Account;
 
 namespace WebApplication
 {
@@ -20,6 +21,7 @@ namespace WebApplication
         {
             services.AddRazorPages();
             services.AddServerSideBlazor().AddCircuitOptions(options => options.DetailedErrors = true);
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +48,7 @@ namespace WebApplication
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
+                endpoints.MapControllers();
             });
         }
     }

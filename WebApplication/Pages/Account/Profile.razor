@@ -42,8 +42,7 @@
     private List<KeyValuePair<string, object>> readOnlyAttr = new List<KeyValuePair<string, object>>() { new KeyValuePair<string, object>("readonly", "") };
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new List<KeyValuePair<string, object>>() { };
 
-
-    protected override Task OnInitializedAsync()
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
         var uname = CookieManager.ReadCookies(JsRuntime, "username");
         var user = UserManager.GetUser(uname.Result);
@@ -53,8 +52,7 @@
         email = user.Email;
         rating = user.RFG_rating;
         misc_rating = user.Misc_rating;
-
-        return base.OnInitializedAsync();
+        return base.OnAfterRenderAsync(firstRender);
     }
 
     void OnSubmitButtonClick()

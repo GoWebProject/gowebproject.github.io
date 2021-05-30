@@ -16,7 +16,7 @@
         <label for="login">Почта:</label><br>
         <input style="width: auto; @(madeAttempt && email.Length == 0 && email.Contains('@') ? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
         <label for="rating">РФГ рейтинг:</label><br>
-        <input style="width: auto;@(madeAttempt && !checkRating()  ? "border-color:red;" : "")" class="form-control input_user" @bind="rating" type="text" id="rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+        <input style="width: auto;@(madeAttempt && !checkRating() ? "border-color:red;" : "")" class="form-control input_user" @bind="rating" type="text" id="rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
         <label for="misc_racing">Другие рейтинги:</label><br>
         <input style="width: auto; " class="form-control input_user" @bind="misc_rating" type="text" id="misc_rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
     </div>
@@ -39,8 +39,8 @@
     private string buttonLabel = "Изменить данные";
     private string rating = "";
     private string misc_rating = "";
-    private List<KeyValuePair<string, object>> readOnlyAttr = new List<KeyValuePair<string, object>>() { new KeyValuePair<string, object>("readonly", "") };
-    private List<KeyValuePair<string, object>> notReadOnlyAttr = new List<KeyValuePair<string, object>>() { };
+    private List<KeyValuePair<string, object>> readOnlyAttr = new List<KeyValuePair<string, object>>() {new KeyValuePair<string, object>("readonly", "")};
+    private List<KeyValuePair<string, object>> notReadOnlyAttr = new List<KeyValuePair<string, object>>() {};
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -57,10 +57,10 @@
 
     void OnSubmitButtonClick()
     {
-        if (disable_fields) {
+        if (disable_fields)
+        {
             disable_fields = false;
             buttonLabel = "Сохранить изменения";
-
         }
 
         else
@@ -68,13 +68,12 @@
             var change_user = false;
             if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
             {
-                change_user = UserManager.ChangeUser(old_username,new User(username, email, _pwd, fullname));
+                change_user = UserManager.ChangeUser(old_username, new User(username, email, _pwd, fullname));
                 if (!change_user)
                 {
                     JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");
                     username = "";
                 }
-
             }
             else
             {
@@ -100,9 +99,10 @@
 
     private bool checkRating()
     {
-        foreach(var c in rating)
+        foreach (var c in rating)
         {
-            if(char.IsDigit(c)){
+            if (char.IsDigit(c))
+            {
                 return false;
             }
         }

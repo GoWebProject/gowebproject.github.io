@@ -41,8 +41,8 @@
 
     [Parameter]
     public string LoggedUsername { get; set; }
-    
-    protected override Task OnAfterRenderAsync(bool firstRender)
+
+    protected override Task OnInitializedAsync()
     {
         var user = UserManager.GetUser(LoggedUsername);
         username = user.Username;
@@ -51,8 +51,8 @@
         email = user.Email;
         rating = user.RFG_rating;
         misc_rating = user.Misc_rating;
-        return base.OnAfterRenderAsync(firstRender);
-    }
+        return base.OnInitializedAsync();
+    }a
 
     void OnSubmitButtonClick()
     {

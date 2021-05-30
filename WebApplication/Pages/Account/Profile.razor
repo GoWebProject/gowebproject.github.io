@@ -28,7 +28,7 @@
 
 @code{
     private bool disable_fields = true;
-    private bool madeAttempt = true;
+    private bool madeAttempt;
     private string username = "";
     private string old_username = "";
     private string fullname = "";
@@ -36,16 +36,15 @@
     private string buttonLabel = "Изменить данные";
     private string rating = "";
     private string misc_rating = "";
-    private List<KeyValuePair<string, object>> readOnlyAttr = new List<KeyValuePair<string, object>>() {new KeyValuePair<string, object>("readonly", "")};
-    private List<KeyValuePair<string, object>> notReadOnlyAttr = new List<KeyValuePair<string, object>>() {};
+    private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
+    private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
 
+    [Parameter]
+    public string LoggedUsername { get; set; }
+    
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        JsRuntime.InvokeVoidAsync("alert", "влаиалываты");
-        var uname = CookieManager.ReadCookies(JsRuntime, "username");
-        JsRuntime.InvokeVoidAsync("alert", uname.Result);
-        var user = UserManager.GetUser(uname.Result);
-        JsRuntime.InvokeVoidAsync("alert", user.ToString());
+        var user = UserManager.GetUser(LoggedUsername);
         username = user.Username;
         old_username = username;
         fullname = user.FullName;

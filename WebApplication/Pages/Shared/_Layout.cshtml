@@ -1,6 +1,4 @@
-﻿@using WebApplication.Models
-@using Microsoft.JSInterop
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <base href="~/"/>
 <head>
@@ -28,9 +26,8 @@
                         @{
                             var isLoggedIn = Context.Request.Cookies.ContainsKey("username");
                             var profileLabel = isLoggedIn ? "Профиль" : "Вход";
-                            var profilePage =  isLoggedIn ? "Account/Profile/" : "Account/LoginPage";
                         }
-                        <a class="nav-link text-dark" href="@profilePage">
+                        <a class="nav-link text-dark" href="Account/Profile">
 
                             @profileLabel
                         </a>

@@ -19,7 +19,6 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddControllers();
             services.AddServerSideBlazor().AddCircuitOptions(options => options.DetailedErrors = true);
         }
 
@@ -47,7 +46,6 @@ namespace WebApplication
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
-                endpoints.MapControllers();
             });
         }
     }

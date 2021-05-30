@@ -99,7 +99,7 @@ namespace WebApplication.Models
         {
             var dbase = new DBManager();
             dbase.InsertCommand(
-                $"update accounts set username='{user.Username}', email='{user.Email}',full_name='{user.FullName}',rating={user.RFG_rating},misc_ratings='{user.Misc_rating}' where username={oldUsername}");
+                $"update accounts set username='{user.Username}', email='{user.Email}',full_name='{user.FullName}',rating={user.RFG_rating},misc_ratings='{user.Misc_rating}' where username='{oldUsername}'");
             dbase.Close();
             return true;
         }

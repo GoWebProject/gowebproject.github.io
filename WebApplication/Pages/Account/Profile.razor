@@ -41,6 +41,7 @@
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
+        JsRuntime.InvokeVoidAsync("alert", "влаиалываты");
         var uname = CookieManager.ReadCookies(JsRuntime, "username");
         JsRuntime.InvokeVoidAsync("alert", uname.Result);
         var user = UserManager.GetUser(uname.Result);

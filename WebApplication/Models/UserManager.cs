@@ -30,7 +30,7 @@ namespace WebApplication.Models
                     dbase.GetReader(
                         $"select username,email,pwd,full_name,salt,rating,misc_ratings from accounts");
                 User user = null;
-                if (reader.Read())
+                while (reader.Read())
                 {
                     user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
                         reader.GetString(4), reader.GetInt32(5).ToString(), reader.GetString(6));

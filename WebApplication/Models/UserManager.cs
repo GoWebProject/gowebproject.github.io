@@ -20,6 +20,28 @@ namespace WebApplication.Models
             return user;
         }
 
+        public async Task<List<User>> GetUsers()
+        {
+            var res = new List<User>();
+            await Task.Run(() =>
+            {
+                var dbase = new DBManager();
+                var reader =
+                    dbase.GetReader(
+                        $"select username,email,pwd,full_name,salt from accounts");
+                User user = null;
+                if (reader.Read())
+                {
+                    user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4));
+                    res.Add(user);
+                }
+
+                dbase.Close();
+            });
+            return res;
+        }
+
         public static User GetUser(string username)
         {
             var dbase = new DBManager();

@@ -5,17 +5,29 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Update="Pages\LoginPage.razor">
-        <DependentUpon>LoginPage.cshtml</DependentUpon>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="MySql.Data" Version="8.0.25" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Services" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="Pages\Account\Registration.razor">
+        <DependentUpon>Registration.cshtml</DependentUpon>
+      </Content>
+      <Content Update="Pages\Account\Login.razor">
+        <DependentUpon>Login.cshtml</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Pages\Account\LoginModel.cs">
+        <DependentUpon>Login.cshtml</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\Account\RegistrationModel.cshtml.cs">
+        <DependentUpon>Registration.cshtml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

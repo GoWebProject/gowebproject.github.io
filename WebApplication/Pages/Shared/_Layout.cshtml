@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+<base href="~/"/>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,6 +9,10 @@
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
+@{
+    var username = Context.Request.Cookies["username"];
+    var isLoggedIn = username != null;
+}
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
@@ -22,17 +27,27 @@
                         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Главная</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/PlayerList">Список Игроков</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-grow-1 mr-sm-auto">
+                    <li class="nav-item">
                         @{
-                            var profileLabel = User.Identity != null ? "Профиль" : "Вход";
-                            var profilePage = User.Identity != null ? "Account/Profile/" : "Account/LoginPage";
+                            var profileLabel = isLoggedIn ? $"Привет, {username}" : "Вход";
+                            var profileRoute = isLoggedIn ? "Account/Profile" : "Account/Login";
                         }
-                        <a class="nav-link text-dark" href="@profilePage">
-
+                        <a class="nav-link text-dark" href="@profileRoute">
                             @profileLabel
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/PlayerList">Список Игроков</a>
+                        @{
+                            var registrationLabel = isLoggedIn ? "Выйти" : "Регистрация";
+                            var registrationRoute = isLoggedIn ? "/Account/Logout" : "Account/Registration";
+                        }
+                        <a class="nav-link text-dark" href="@registrationRoute">
+                            @registrationLabel
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -1,9 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web;
-@page "/RegistrationPage"
 @using Microsoft.JSInterop;
+@using WebApplication.Models
 @inject IJSRuntime JsRuntime;
-@inherits RegistrationPageModel
 @inject NavigationManager _navigationManager
 
 <form>
@@ -28,7 +27,7 @@
 
     void OnSubmitButtonClick()
     {
-        if (!OnSubmitListener(username, fullname, email, _pwd))
+        if (!CheckCorrect())
         {
             if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
             {
@@ -48,6 +47,18 @@
                 madeAttempt = true;
             }
         }
+        else
+        {
+            _navigationManager.NavigateTo("/Account/Profile", true);
+        }
     }
 
+    private bool CheckCorrect()
+    {
+        if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (_pwd.Length > 0) && (email.Contains('@')))
+        {
+            return UserManager.CreateUser(new User(username, email, _pwd, fullname));
+        }
+        return false;
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace WebApplication.Models
@@ -9,6 +10,18 @@ namespace WebApplication.Models
     {
         public static User GetUser(string username, string pwd)
         {
+            var user = GetUser(username);
+            if (user == null) return null;
+            if (GenerateHashFromSalt(pwd, user.PasswordSalt) != user.PasswordHash)
+            {
+                user = null;
+            }
+
+            return user;
+        }
+
+        public static User GetUser(string username)
+        {
             var dbase = new DBManager();
             var reader =
                 dbase.GetReader(
@@ -16,11 +29,8 @@ namespace WebApplication.Models
             User user = null;
             if (reader.Read())
             {
-                user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3));
-                if (GenerateHashFromSalt(pwd, reader.GetString(4)) != user.PasswordHash)
-                {
-                    user = null;
-                }
+                user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                    reader.GetString(4));
             }
 
             dbase.Close();

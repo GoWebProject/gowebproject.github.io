@@ -2,17 +2,19 @@ namespace WebApplication.Models
 {
     public class User
     {
-        public User(string username, string email, string pwd, string fullName)
+        public User(string username, string email, string pwd, string fullName, string passwordSalt = null)
         {
             Username = username;
             PasswordHash = pwd;
             Email = email;
             FullName = fullName;
+            this.PasswordSalt = passwordSalt;
         }
 
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
+        public string PasswordSalt { get; set; }
     }
 }

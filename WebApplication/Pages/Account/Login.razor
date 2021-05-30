@@ -1,7 +1,7 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Identity
-@page "/LoginPage"
+@using Microsoft.AspNetCore.Components.Web;
+@using Microsoft.AspNetCore.Http
 @using Microsoft.JSInterop;
 @using WebApplication.Models
 @inject IJSRuntime JsRuntime;
@@ -16,7 +16,7 @@
 <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Войти</button>
 <div class="mt-4">
     <div class="d-flex links">
-        Нет аккаунта? <a href="/RegistrationPage" class="ml-2">Регистрация</a>
+        Нет аккаунта? <a href="/Account/Registration" class="ml-2">Регистрация</a>
     </div>
     <div class="d-flex links">
         <a href="#">Забыли пароль?</a>
@@ -26,7 +26,6 @@
 @code{
     private string _login;
     private string _pwd;
-
     private void OnSubmitButtonClick()
     {
         var user = UserManager.GetUser(_login, _pwd);
@@ -36,8 +35,8 @@
         }
         else
         {
-            _navigationManager.NavigateTo("/Account/Profile");
+            CookieManager.WriteCookies(JsRuntime, "username", _login);
+            _navigationManager.NavigateTo("/Account/Profile",true);
         }
     }
-
 }

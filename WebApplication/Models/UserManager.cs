@@ -20,15 +20,16 @@ namespace WebApplication.Models
             return user;
         }
 
-        public static async Task<List<User>> GetUsers()
+        public static async Task<List<User>> GetUsers(string orderby = null)
         {
             var res = new List<User>();
             await Task.Run(() =>
             {
                 var dbase = new DBManager();
+                var order = orderby == null ? "" : $" order by {orderby}";
                 var reader =
                     dbase.GetReader(
-                        $"select username,email,pwd,full_name,salt,rating,misc_ratings from accounts");
+                        $"select username,email,pwd,full_name,salt,rating,misc_ratings from accounts{order}");
                 User user = null;
                 while (reader.Read())
                 {

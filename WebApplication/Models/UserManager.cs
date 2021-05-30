@@ -20,7 +20,7 @@ namespace WebApplication.Models
             return user;
         }
 
-        public async Task<List<User>> GetUsers()
+        public static async Task<List<User>> GetUsers()
         {
             var res = new List<User>();
             await Task.Run(() =>
@@ -28,7 +28,7 @@ namespace WebApplication.Models
                 var dbase = new DBManager();
                 var reader =
                     dbase.GetReader(
-                        $"select username,email,pwd,full_name,salt from accounts");
+                        $"select username,email,pwd,full_name,salt,rating,misc_ratings from accounts");
                 User user = null;
                 if (reader.Read())
                 {

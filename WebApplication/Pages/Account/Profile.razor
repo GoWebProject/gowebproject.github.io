@@ -15,8 +15,8 @@
         <input style="width: auto;@(madeAttempt && fullname.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="fullname" type="text" id="fullname" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
         <label for="login">Почта:</label><br>
         <input style="width: auto; @(madeAttempt && email.Length == 0 && email.Contains('@') ? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
-        <label for="racing">РФГ рейтинг:</label><br>
-        <input style="width: auto; @(madeAttempt @*&& _pwd.Length == 0*@ ? "border-color:red;" : "");" class="form-control input_user" @bind="rating" type="text" id="rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+        <label for="rating">РФГ рейтинг:</label><br>
+        <input style="width: auto;@(madeAttempt && !checkRating()  ? "border-color:red;" : "")" class="form-control input_user" @bind="rating" type="text" id="rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
         <label for="misc_racing">Другие рейтинги:</label><br>
         <input style="width: auto; " class="form-control input_user" @bind="misc_rating" type="text" id="misc_rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
     </div>
@@ -37,7 +37,7 @@
     private string email = "";
     private string _pwd = "";
     private string buttonLabel = "Изменить данные";
-    private int rating = 1500;
+    private string rating = "";
     private string misc_rating = "";
     private List<KeyValuePair<string, object>> readOnlyAttr = new List<KeyValuePair<string, object>>() { new KeyValuePair<string, object>("readonly", "") };
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new List<KeyValuePair<string, object>>() { };
@@ -98,6 +98,17 @@
                 JsRuntime.InvokeVoidAsync("alert", "Данные изменены!");
             }
         }
+    }
+
+    private bool checkRating()
+    {
+        foreach(var c in rating)
+        {
+            if(char.IsDigit(c)){
+                return false;
+            }
+        }
+        return true;
     }
 
 

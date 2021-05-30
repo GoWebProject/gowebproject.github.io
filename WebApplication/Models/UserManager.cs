@@ -33,7 +33,7 @@ namespace WebApplication.Models
                 if (reader.Read())
                 {
                     user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                        reader.GetString(4));
+                        reader.GetString(4), reader.GetInt32(5).ToString(), reader.GetString(6));
                     res.Add(user);
                 }
 
@@ -47,12 +47,12 @@ namespace WebApplication.Models
             var dbase = new DBManager();
             var reader =
                 dbase.GetReader(
-                    $"select username,email,pwd,full_name,salt from accounts where username='{username}'"); //TODO: SQL INJECTION
+                    $"select username,email,pwd,full_name,salt,rating,misc_ratings from accounts where username='{username}'"); //TODO: SQL INJECTION
             User user = null;
             if (reader.Read())
             {
                 user = new User(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                    reader.GetString(4));
+                    reader.GetString(4),reader.GetInt32(5).ToString(),reader.GetString(6));
             }
 
             dbase.Close();
@@ -90,7 +90,7 @@ namespace WebApplication.Models
             if (UserExists(user.Username)) return false;
             var (key, value) = GenerateHash(user.PasswordHash);
             dbase.InsertCommand(
-                $"insert into accounts value('{user.Username}','{user.Email}','{key}','{user.FullName}','{value}')");
+                $"insert into accounts value('{user.Username}','{user.Email}','{key}','{user.FullName}','{value}',{user.RFG_rating},{user.Misc_rating})");
             dbase.Close();
             return true;
         }
@@ -99,7 +99,7 @@ namespace WebApplication.Models
         {
             var dbase = new DBManager();
             dbase.InsertCommand(
-                $"update accounts set username='{user.Username}', email='{user.Email}',full_name='{user.FullName}' where username={oldUsername}");
+                $"update accounts set username='{user.Username}', email='{user.Email}',full_name='{user.FullName}',rating={user.RFG_rating},misc_ratings='{user.Misc_rating}' where username={oldUsername}");
             dbase.Close();
             return true;
         }

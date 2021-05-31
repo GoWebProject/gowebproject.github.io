@@ -114,7 +114,7 @@ namespace WebApplication.Models
             var hash = GenerateHashFromSalt(pwd, salt);
             dbase.Close();
             dbase = new DBManager();
-            dbase.InsertCommand($"update accounts set pwd='{hash}' where username={username}");
+            dbase.InsertCommand($"update accounts set pwd='{hash}' where username='{username}'");
             dbase.Close();
             return true;
         }

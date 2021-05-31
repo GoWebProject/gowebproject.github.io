@@ -33,7 +33,7 @@ namespace WebApplication.Models
         public void Close()
         {
             _mySqlConnection.Close();
-            _cachedReader.Close();
+            if(_cachedReader!=null)  _cachedReader.Close();
         }
     }
 }

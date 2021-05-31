@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     @{
-        var users = await UserManager.GetUsers();
+        var users = await UserManager.GetUsers("rating desc");
         for (var i = 0; i < users.Count; i++)
         {
             var user = users[i];

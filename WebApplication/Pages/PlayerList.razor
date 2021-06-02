@@ -26,8 +26,8 @@
                 <tr>
                     @{var user = id;}
                    @* <th scope="row">@(i + 1)</th>*@
-                    @{username = user.FullName;}
-                    @{RfgRating = user.RfgRating;}
+                    @{var username = user.FullName;}
+                    @{var RfgRating = user.RfgRating;}
                     @if (inChange)
                     {
                     <td><input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username" @attributes="@(inChange ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
@@ -41,7 +41,7 @@
                     @if (isAdmin)
                     {
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Изменить данные пользователя" @onclick="@(e => OnSubmitButtonClick_change(id))">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Изменить данные пользователя" @onclick="@(e => OnSubmitButtonClick_change(id,username,RfgRating))">
                             @if (!inChange)
                             {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -81,8 +81,8 @@
     bool isAdmin;
     private bool madeAttempt=false;
     private bool inChange = false;
-    private string username = "";
-    private string RfgRating = "";
+@*    private string username = "";
+    private string RfgRating = "";*@
     private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
 
@@ -94,7 +94,7 @@
         return base.OnInitializedAsync();
     }
 
-    void OnSubmitButtonClick_change(User i)
+    void OnSubmitButtonClick_change(User i,string username,string RfgRating)
     {
         if (!inChange)
         {

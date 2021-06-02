@@ -7,17 +7,17 @@
 @inject NavigationManager _navigationManager;
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th scope="col">№</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Рейтинг</th>
-            @{
-                if (isAdmin)
-                {
-                    <th scope="col">Действия</th>
-                }
+    <tr>
+        <th scope="col">№</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Рейтинг</th>
+        @{
+            if (isAdmin)
+            {
+                <th scope="col">Действия</th>
             }
-        </tr>
+        }
+    </tr>
     </thead>
     <tbody>
         
@@ -74,30 +74,32 @@
 </table>
 
 @code{
+
     [Parameter]
     public string LoggedUsername { get; set; }
+
     public List<User> users;
     bool isAdmin;
     private bool madeAttempt;
     private bool inChange = false;
     private string username = "";
     private string RfgRating = "";
-    private List<KeyValuePair<string, object>> readOnlyAttr = new() { new KeyValuePair<string, object>("readonly", "") };
+    private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
+
     protected override Task OnInitializedAsync()
     {
         var curUser = LoggedUsername != null ? UserManager.GetUser(LoggedUsername) : null;
         isAdmin = curUser is { AccessLevel: 1 };
         users = UserManager.GetUsers("rating desc");
         return base.OnInitializedAsync();
-
     }
+
     void OnSubmitButtonClick_change(int i)
     {
         if (!inChange)
         {
             inChange = true;
-
         }
         else
         {
@@ -108,15 +110,12 @@
                 inChange = false;
                 madeAttempt = false;
             }
-
         }
-
-
-
     }
+
     void OnSubmitButtonClick_dell(int i)
     {
         UserManager.DeleteUser(users[i].Username);
-
     }
+
 }

@@ -98,6 +98,7 @@
 
     void OnSubmitButtonClick_change(User i,string username,string RfgRating,int cnt)
     {
+        i = 0;
         JsRuntime.InvokeVoidAsync("alert", i.Username);
         JsRuntime.InvokeVoidAsync("alert", cnt);
         JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);

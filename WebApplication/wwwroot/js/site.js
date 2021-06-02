@@ -16,3 +16,9 @@ window.ReadCookie = {
         return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
     }
 }
+
+window.DeleteCookie = {
+    DeleteCookie: function (name) {
+        document.cookie = name + '=; Max-Age=-99999999;';
+    }
+}

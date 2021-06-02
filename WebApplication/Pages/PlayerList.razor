@@ -32,23 +32,23 @@
                 i += 1;
             }
             else { i = 0; }
-            @{var username = user.FullName;}
-            @{var RfgRating = user.RfgRating;}
+            @{username.Add(user.FullName);}
+            @{RfgRating.Add(user.RfgRating);}
 
             @if (inChange[cnt])
             {
-                <td><input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
-                <td><input style="width: auto; @(madeAttempt && RfgRating.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="RfgRating" type="text" id="RfgRating" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
+                <td><input style="width: auto; @(madeAttempt && username[cnt].Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
+                <td><input style="width: auto; @(madeAttempt && RfgRating[cnt].Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="RfgRating" type="text" id="RfgRating" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
             }
             else
             {
-                <td>@username</td>
-                <td>@RfgRating</td>
+                <td>@username[cnt]</td>
+                <td>@RfgRating[cnt]</td>
             }
             @if (isAdmin)
             {
                 <td>
-                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Изменить данные пользователя" @onclick="@(e => OnSubmitButtonClick_change(id,username,RfgRating,cnt))">
+                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Изменить данные пользователя" @onclick="@(e => OnSubmitButtonClick_change(id,cnt))">
                         @if (!inChange[cnt])
                         {
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -87,6 +87,8 @@
     public List<User> users;
     bool isAdmin;
     private bool madeAttempt=false;
+    List<string> username = new List<string>();
+    List<string> RfgRating = new List<string>();
     List<bool> inChange = new List<bool>();
     private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
@@ -99,7 +101,7 @@
         return base.OnInitializedAsync();
     }
 
-    void OnSubmitButtonClick_change(User u,string username,string RfgRating,int cnt)
+    void OnSubmitButtonClick_change(User u,int cnt)
     {
         JsRuntime.InvokeVoidAsync("alert", u.Username);
         JsRuntime.InvokeVoidAsync("alert", cnt);
@@ -112,11 +114,11 @@
         else
         {
             madeAttempt = true;
-            if (RfgRating.Length != 0 && username.Length != 0)
+            if (RfgRating[cnt].Length != 0 && username[cnt].Length != 0)
             {
                 JsRuntime.InvokeVoidAsync("alert", username);
                 JsRuntime.InvokeVoidAsync("alert", RfgRating);
-                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username, rfgRating: RfgRating));
+                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username[cnt], rfgRating: RfgRating[cnt]));
                 inChange[cnt] = false;
                 madeAttempt = false;
             }

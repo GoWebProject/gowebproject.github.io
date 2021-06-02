@@ -106,6 +106,15 @@ namespace WebApplication.Models
             dbase.Close();
             return true;
         }
+        
+        public static bool DeleteUser(string username)
+        {
+            var dbase = new DBManager();
+            dbase.InsertCommand(
+                $"delete from accounts where username='{username}'");
+            dbase.Close();
+            return true;
+        }
 
         public static bool ChangeUserPassword(string username, string pwd)
         {

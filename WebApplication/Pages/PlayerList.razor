@@ -103,31 +103,26 @@
 
     void OnSubmitButtonClick_change(User u,int cnt)
     {
-        JsRuntime.InvokeVoidAsync("alert", u.Username);
-        JsRuntime.InvokeVoidAsync("alert", cnt);
-        JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);
+
         if (!inChange[cnt])
         {
             inChange[cnt] = true;
-            JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);
         }
         else
         {
             madeAttempt = true;
             if (RfgRating[cnt].Length != 0 && username[cnt].Length != 0)
             {
-                JsRuntime.InvokeVoidAsync("alert", username);
-                JsRuntime.InvokeVoidAsync("alert", RfgRating);
                 UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username[cnt], rfgRating: RfgRating[cnt]));
                 inChange[cnt] = false;
                 madeAttempt = false;
+                _navigationManager.NavigateTo("/Account/PlayerList", true);
             }
         }
     }
 
     void OnSubmitButtonClick_dell(User i)
     {
-        //JsRuntime.InvokeVoidAsync("alert", i.Username);
         UserManager.DeleteUser(i.Username);
         _navigationManager.NavigateTo("/Account/PlayerList", true);
     }

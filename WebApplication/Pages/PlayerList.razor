@@ -76,8 +76,8 @@
     protected override Task OnInitializedAsync()
     {
         var curUser = LoggedUsername != null ? UserManager.GetUser(LoggedUsername) : null;
-        var isAdmin = curUser is { AccessLevel: 1 };
-        var users = UserManager.GetUsers("rating desc");
+        isAdmin = curUser is { AccessLevel: 1 };
+        users = UserManager.GetUsers("rating desc").Result;
         return base.OnInitializedAsync();
 
     }

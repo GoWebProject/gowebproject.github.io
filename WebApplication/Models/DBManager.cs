@@ -13,7 +13,7 @@ namespace WebApplication.Models
         {
             _mySqlConnection = new MySqlConnection(Environment.GetEnvironmentVariable("mainDB_credentials"));
             _mySqlDataAdapter = new MySqlDataAdapter();
-            _mySqlConnection.Open();
+            _mySqlConnection.Open() ;
         }
 
         public MySqlDataReader GetReader(string cmd)

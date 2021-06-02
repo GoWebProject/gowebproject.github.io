@@ -27,7 +27,7 @@
             @{var user = id;}
             <th scope="row">@(i + 1)</th>
             @{ inChange.Add(false);}
-            @{var cnt = i; }}
+            @{var cnt = i; }
             @{i += 1;}
             @{var username = user.FullName;}
             @{var RfgRating = user.RfgRating;}
@@ -85,42 +85,44 @@
     bool isAdmin;
     private bool madeAttempt=false;
     List<bool> inChange = new List<bool>();
-private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
-private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
+    private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
+    private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
 
-protected override Task OnInitializedAsync()
-{
-    var curUser = LoggedUsername != null ? UserManager.GetUser(LoggedUsername) : null;
-    isAdmin = curUser is { AccessLevel: 1 };
-    users = UserManager.GetUsers("rating desc");
-    return base.OnInitializedAsync();
-}
-
-void OnSubmitButtonClick_change(User i,string username,string RfgRating,int cnt)
-{
-    if (!inChange[cnt])
+    protected override Task OnInitializedAsync()
     {
-        inChange[cnt] = true;
+        var curUser = LoggedUsername != null ? UserManager.GetUser(LoggedUsername) : null;
+        isAdmin = curUser is { AccessLevel: 1 };
+        users = UserManager.GetUsers("rating desc");
+        return base.OnInitializedAsync();
     }
-    else
+
+    void OnSubmitButtonClick_change(User i,string username,string RfgRating,int cnt)
     {
-        madeAttempt = true;
-        if (RfgRating.Length != 0 && username.Length != 0)
+        JsRuntime.InvokeVoidAsync("alert", i.Username);
+        JsRuntime.InvokeVoidAsync("alert", cnt);
+        if (!inChange[cnt])
         {
-            JsRuntime.InvokeVoidAsync("alert", username);
-            JsRuntime.InvokeVoidAsync("alert", RfgRating);
-            UserManager.ChangeUser(i.Username, new User(i.Username, i.Email, "", username, rfgRating: RfgRating));
-            inChange[cnt] = false;
-            madeAttempt = false;
+            inChange[cnt] = true;
+        }
+        else
+        {
+            madeAttempt = true;
+            if (RfgRating.Length != 0 && username.Length != 0)
+            {
+                JsRuntime.InvokeVoidAsync("alert", username);
+                JsRuntime.InvokeVoidAsync("alert", RfgRating);
+                UserManager.ChangeUser(i.Username, new User(i.Username, i.Email, "", username, rfgRating: RfgRating));
+                inChange[cnt] = false;
+                madeAttempt = false;
+            }
         }
     }
-}
 
-void OnSubmitButtonClick_dell(User i)
-{
-    //JsRuntime.InvokeVoidAsync("alert", i.Username);
-    UserManager.DeleteUser(i.Username);
-    _navigationManager.NavigateTo("/Account/PlayerList", true);
-}
+    void OnSubmitButtonClick_dell(User i)
+    {
+        //JsRuntime.InvokeVoidAsync("alert", i.Username);
+        UserManager.DeleteUser(i.Username);
+        _navigationManager.NavigateTo("/Account/PlayerList", true);
+    }
 
 }

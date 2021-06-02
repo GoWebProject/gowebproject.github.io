@@ -28,7 +28,10 @@
             <th scope="row">@(i + 1)</th>
             @{ inChange.Add(false);}
             @{var cnt = i; }
-            @{i += 1;}
+            @if (i < users.Count) {
+                i += 1;
+            }
+            else { i = 0; }
             @{var username = user.FullName;}
             @{var RfgRating = user.RfgRating;}
 
@@ -98,7 +101,6 @@
 
     void OnSubmitButtonClick_change(User u,string username,string RfgRating,int cnt)
     {
-        i = 0;
         JsRuntime.InvokeVoidAsync("alert", u.Username);
         JsRuntime.InvokeVoidAsync("alert", cnt);
         JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);

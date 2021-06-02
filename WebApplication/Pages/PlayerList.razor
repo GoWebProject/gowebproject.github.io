@@ -77,7 +77,7 @@
     {
         var curUser = LoggedUsername != null ? UserManager.GetUser(LoggedUsername) : null;
         isAdmin = curUser is { AccessLevel: 1 };
-        users = UserManager.GetUsers("rating desc").Result;
+        users = UserManager.GetUsers("rating desc");
         return base.OnInitializedAsync();
 
     }

@@ -16,5 +16,11 @@ namespace WebApplication.Models
         {
             return await jsRuntime.InvokeAsync<string>("ReadCookie.ReadCookie", cookieName);
         }
+
+        public static async Task DeleteCookies(IJSRuntime jsRuntime, string cookieName)
+        {
+            await jsRuntime.InvokeVoidAsync(
+                "ReadCookie.DeleteCookie", cookieName);
+        }
     }
 }

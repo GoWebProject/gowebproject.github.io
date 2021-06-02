@@ -100,9 +100,11 @@
     {
         JsRuntime.InvokeVoidAsync("alert", i.Username);
         JsRuntime.InvokeVoidAsync("alert", cnt);
+        JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);
         if (!inChange[cnt])
         {
             inChange[cnt] = true;
+            JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);
         }
         else
         {

@@ -105,6 +105,8 @@
             madeAttempt = true;
             if (RfgRating.Length != 0 && username.Length != 0)
             {
+                JsRuntime.InvokeVoidAsync("alert", username);
+                JsRuntime.InvokeVoidAsync("alert", RfgRating);
                 UserManager.ChangeUser(i.Username, new User(i.Username, i.Email, "", username, rfgRating: RfgRating));
                 inChange = false;
                 madeAttempt = false;
@@ -116,6 +118,7 @@
     {
         //JsRuntime.InvokeVoidAsync("alert", i.Username);
         UserManager.DeleteUser(i.Username);
+        _navigationManager.NavigateTo("/Account/PlayerList", true);
     }
 
 }

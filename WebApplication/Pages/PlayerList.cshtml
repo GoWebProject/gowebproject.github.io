@@ -18,7 +18,10 @@
         <th scope="col">Имя</th>
         <th scope="col">Рейтинг</th>
         @{
-            if (isAdmin) <th scope="col">Действия</th>
+            if (isAdmin)
+            {
+                <th scope="col">Действия</th>
+            }
         }
     </tr>
     </thead>
@@ -33,14 +36,17 @@
                 <td>@user.FullName</td>
                 <td>@user.RfgRating</td>
                 @{
-                    if (isAdmin) <td>
-                                     <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Изменить данные пользователя">
-                                         <i class="fas fa-edit"></i>
-                                     </button>
-                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Удалить пользователя">
-                                         <i class="far fa-trash-alt"></i>
-                                     </button>
-                                 </td>
+                    if (isAdmin)
+                    {
+                        <td>
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Изменить данные пользователя">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Удалить пользователя">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    }
                 }
             </tr>
         }

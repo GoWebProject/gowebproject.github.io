@@ -37,8 +37,8 @@
 
             @if (inChange[cnt])
             {
-                <td><input style="width: auto; @(madeAttempt && username[cnt].Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
-                <td><input style="width: auto; @(madeAttempt && RfgRating[cnt].Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="RfgRating" type="text" id="RfgRating" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
+                <td><input style="width: auto; @(madeAttempt && username[cnt].Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username[cnt]" type="text" id="username" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
+                <td><input style="width: auto; @(madeAttempt && RfgRating[cnt].Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="RfgRating[cnt]" type="text" id="RfgRating" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>
             }
             else
             {

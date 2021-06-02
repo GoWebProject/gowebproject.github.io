@@ -116,7 +116,7 @@
                 UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username[cnt], rfgRating: RfgRating[cnt]));
                 inChange[cnt] = false;
                 madeAttempt = false;
-                _navigationManager.NavigateTo("/Account/PlayerList", true);
+                _navigationManager.NavigateTo("/PlayerList", true);
             }
         }
     }
@@ -124,7 +124,7 @@
     void OnSubmitButtonClick_dell(User i)
     {
         UserManager.DeleteUser(i.Username);
-        _navigationManager.NavigateTo("/Account/PlayerList", true);
+        _navigationManager.NavigateTo("/PlayerList", true);
     }
 
 }

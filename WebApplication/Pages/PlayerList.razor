@@ -28,7 +28,7 @@
             <th scope="row">@(i + 1)</th>
             @{ inChange.Add(false);}
             @{var cnt = i; }
-            @if (i < users.Count) {
+            @if (i < users.Count-1) {
                 i += 1;
             }
             else { i = 0; }

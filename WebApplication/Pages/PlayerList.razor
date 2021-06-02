@@ -26,12 +26,12 @@
         <tr>
             @{var user = id;}
             <th scope="row">@(i + 1)</th>
-            @{i+=1;}
             @{ inChange.Add(false);}
             @{var cnt = i; }}
+            @{i += 1;}
             @{var username = user.FullName;}
             @{var RfgRating = user.RfgRating;}
-           
+
             @if (inChange[cnt])
             {
                 <td><input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username" @attributes="@(inChange[cnt] ? notReadOnlyAttr:readOnlyAttr)"><br><br></td>

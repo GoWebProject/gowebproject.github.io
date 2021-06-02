@@ -49,8 +49,8 @@
         old_username = username;
         fullname = user.FullName;
         email = user.Email;
-        rating = user.RFG_rating;
-        misc_rating = user.Misc_rating;
+        rating = user.RfgRating;
+        misc_rating = user.MiscRating;
         return base.OnInitializedAsync();
     }
 
@@ -65,9 +65,9 @@
         else
         {
             var change_user = false;
-            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0)  && (email.Contains('@')))
+            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (email.Contains('@')))
             {
-                change_user = UserManager.ChangeUser(old_username, new User(username, email, "", fullname));
+                change_user = UserManager.ChangeUser(old_username, new User(username, email, "", fullname, rfgRating: rating, miscRating: misc_rating));
                 if (!change_user)
                 {
                     JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");

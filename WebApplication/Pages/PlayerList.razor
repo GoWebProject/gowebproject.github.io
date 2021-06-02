@@ -96,10 +96,10 @@
         return base.OnInitializedAsync();
     }
 
-    void OnSubmitButtonClick_change(User i,string username,string RfgRating,int cnt)
+    void OnSubmitButtonClick_change(User u,string username,string RfgRating,int cnt)
     {
         i = 0;
-        JsRuntime.InvokeVoidAsync("alert", i.Username);
+        JsRuntime.InvokeVoidAsync("alert", u.Username);
         JsRuntime.InvokeVoidAsync("alert", cnt);
         JsRuntime.InvokeVoidAsync("alert", inChange[cnt]);
         if (!inChange[cnt])
@@ -114,7 +114,7 @@
             {
                 JsRuntime.InvokeVoidAsync("alert", username);
                 JsRuntime.InvokeVoidAsync("alert", RfgRating);
-                UserManager.ChangeUser(i.Username, new User(i.Username, i.Email, "", username, rfgRating: RfgRating));
+                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username, rfgRating: RfgRating));
                 inChange[cnt] = false;
                 madeAttempt = false;
             }

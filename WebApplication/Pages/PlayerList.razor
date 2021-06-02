@@ -26,7 +26,7 @@
                 <tr>
                     @{var user = users[i];}
                     <th scope="row">@(i + 1)</th>
-                    @{username = user.FullName;}
+                    @{var username = user.FullName;}
                     @{RfgRating = user.RfgRating;}
                     @if (inChange)
                     {
@@ -81,7 +81,6 @@
     bool isAdmin;
     private bool madeAttempt=false;
     private bool inChange = false;
-    private string username = "";
     private string RfgRating = "";
     private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
@@ -104,9 +103,9 @@
         else
         {
             madeAttempt = true;
-            if (RfgRating.Length != 0 && username.Length != 0)
+            if (RfgRating.Length != 0 && un.Length != 0)
             {
-                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username, rfgRating: RfgRating));
+                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", un, rfgRating: RfgRating));
                 inChange = false;
                 madeAttempt = false;
             }
@@ -115,8 +114,7 @@
 
     void OnSubmitButtonClick_dell(string un)
     {
-        var u = UserManager.GetUser(un);
-        UserManager.DeleteUser(u.Username);
+        UserManager.DeleteUser(un);
     }
 
 }

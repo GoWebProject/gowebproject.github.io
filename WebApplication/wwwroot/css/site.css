@@ -2,76 +2,285 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    /* Vertically center the text there */
 }
 
 .input_user,
 .input_pass:focus {
-  box-shadow: none !important;
-  outline: 0px !important;
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+
+body {
+    background: linear-gradient(rgb(0, 0, 0, 0.90), rgba(0, 0, 0, 0.88)), url('../img/Go.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top;
+    overflow: hidden;
+}
+
+#wrapper {
+    height: 600px;
+    font-family: cursive;
+    text-align: center;
+}
+
+.text {
+    position: relative;
+    top: 30%;
+    width: 700px;
+    min-height: 50px;
+    padding: 10px;
+    margin: auto;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    opacity: 0;
+    animation: text 4s 1;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes text {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        color: rgb(255, 255, 255);
+        text-shadow: aliceblue 0 0 6px;
+        opacity: 1;
+
+    }
+}
+
+
+@keyframes text2 {
+    from {
+        opacity: 0;
+
+    }
+
+    to {
+        color: rgb(255, 255, 255);
+        text-shadow: aliceblue 0 0 8px;
+        opacity: 1;
+    }
+}
+
+
+#sign {
+    margin: 0 auto;
+    top: 6%;
+    right: 4%;
+    position: absolute;
+    height: initial;
+    width: auto;
+}
+
+
+.sign_up_or_in {
+
+    font-size: 20px;
+    height: 30px;
+    animation: text2 2s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+    animation-play-state: initial;
+    cursor: pointer;
+    opacity: 0;
+}
+
+#sign:hover {
+    color: rgb(90, 88, 88);
+    text-shadow: gray;
+    opacity: 0.7;
+}
+
+#game {
+    margin: 0 auto;
+    position: relative;
+    top: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: initial;
+    width: auto;
+}
+
+.game {
+    font-size: 30px;
+    animation: text3 3s;
+    animation-delay: 6s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#game:hover {
+    color: rgb(90, 88, 88);
+    text-shadow: gray;
+    opacity: 0.7;
+
+}
+
+@keyframes text3 {
+    from {
+        opacity: 0;
+
+    }
+
+    to {
+        color: rgb(255, 255, 255);
+        text-shadow: aliceblue 0 0 8px;
+        opacity: 1;
+    }
+}
+
+/* Менюшка */
+
+#sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    top: 0%;
+    background: rgba(26, 26, 26, 0.8);
+    border-right: 4px solid gray;
+    color: honeydew;
+    left: -250px;
+    transition: all 600ms;
+}
+
+#sidebar.active {
+    left: 0px;
+}
+
+#sidebar ul li:first-child {
+    text-align: center;
+    font-size: 45px;
+    list-style: none;
+    padding: 20px 10px 10px 1px;
+}
+
+#sidebar ul li:not(:first-child) {
+    width: 90%;
+    font-size: 20px;
+    padding: 5px 1px;
+}
+
+#sidebar ul li p:hover {
+    color: gray;
+    text-shadow: rgb(92, 93, 94) 0 0 2px;
+}
+
+.menu {
+    text-shadow: aliceblue 0 0 8px;
+    cursor: pointer;
+}
+
+#sidebar .toggle_btn {
+    position: absolute;
+    left: 270px;
+    top: 20px;
+    background: rgb(193, 193, 196);
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    animation: btn 4s;
+    animation-delay: 5s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+#sidebar .toggle_btn:hover {
+    background: gray;
+}
+
+#sidebar .toggle_btn:hover span {
+    background: rgb(73, 73, 73);
+}
+
+@keyframes btn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#sidebar .toggle_btn span {
+    display: block;
+    width: 25px;
+    height: 4px;
+    background-color: rgb(73, 73, 73);
+    margin: 4px 0;
 }

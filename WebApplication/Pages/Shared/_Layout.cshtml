@@ -3,6 +3,7 @@
 <base href="~/"/>
 <head>
     <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - клуб Го</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
@@ -14,7 +15,45 @@
     var isLoggedIn = username != null;
 }
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div id="wrapper">
+
+        <div class="text"><h1>Добро пожаловать на сайт посвящённый игре Го</h1></div>
+        <li class="nav-item">
+            @{
+                var profileLabel = AccountManagerService.IsLoggedIn ? "Профиль" : "Вход";
+                var profilePage = AccountManagerService.IsLoggedIn ? "/Profile" : "/LoginPage";
+            }
+            <a class="nav-link text-dark" asp-area="" asp-page="@profilePage">
+
+                @profileLabel
+            </a>
+        </li>
+
+        <div id="sidebar">
+            <div class="toggle_btn" onclick="openMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul>
+                <li>Меню</li>
+                <li><p onclick="document.location='../Profile.cshtml'" class="menu">Профиль</p></li>
+                <li><p onclick="document.location='../PlayerList.cshtml'" class="menu">Список Игроков</p></li>
+                <li><p onclick="document.location='../LoginPage.cshtml'" class="menu">Навигация</p></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <script>
+        function openMenu(){
+            document.getElementById("sidebar").classList.toggle('active');
+        }
+
+    </script>
+    <!--<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">Клуб ГО ДВФУ</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -52,7 +91,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>-->
 </header>
 <div class="container">
     <main role="main" class="pb-3">

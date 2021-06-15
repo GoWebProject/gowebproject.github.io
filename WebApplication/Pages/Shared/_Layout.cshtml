@@ -1,58 +1,44 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<base href="~/"/>
+
 <head>
     <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - клуб Го</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
-@{
-    var username = Context.Request.Cookies["username"];
-    var isLoggedIn = username != null;
-}
+
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-page="/Index">Клуб ГО ДВФУ</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/PlayerList">Список Игроков</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav flex-grow-1 mr-sm-auto">
-                    <li class="nav-item">
-                        @{
-                            var profileLabel = isLoggedIn ? $"Привет, {username}" : "Вход";
-                            var profileRoute = isLoggedIn ? "Account/Profile" : "Account/Login";
-                        }
-                        <a class="nav-link text-dark" href="@profileRoute">
-                            @profileLabel
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        @{
-                            var registrationLabel = isLoggedIn ? "Выйти" : "Регистрация";
-                            var registrationRoute = isLoggedIn ? "/Account/Logout" : "Account/Registration";
-                        }
-                        <a class="nav-link text-dark" href="@registrationRoute">
-                            @registrationLabel
-                        </a>
-                    </li>
-                </ul>
+    <div id="wrapper">
+
+        <div id="sign"><p onclick="document.location='../Account/Login.cshtml'" class="sign_up_or_in">Вход или Регистрация</p></div>
+        
+        <div id="sidebar">
+            <div class="toggle_btn" onclick="openMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+
+            <ul>
+                <li>Меню</li>
+                <li><p onclick="document.location='../Index.cshtml'" class="menu">Главная</p></li>
+                <li><p onclick="document.location='../Account/Profile.cshtml'" class="menu">Профиль</p></li>
+                <li><p onclick="document.location='../PlayerList.cshtml'" class="menu">Список Игроков</p></li>
+                <li><p onclick="document.location='../Account/LoginPage.cshtml'" class="menu">Навигация</p></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+
+    <script>
+        function openMenu(){
+            document.getElementById("sidebar").classList.toggle('active');
+        }
+    </script>
+    
 </header>
 <div class="container">
     <main role="main" class="pb-3">

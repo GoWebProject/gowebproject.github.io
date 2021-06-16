@@ -120,15 +120,16 @@
         try
         {
             users = UserManager.GetUsers();
-            Algorithm.SortUsers(users);
-            if (SearchQuery != null)
-            {
-                users = Algorithm.KMP(SearchQuery, users);
-            }
         }
         catch (Exception)
         {
             users = new List<User>();
+            users.Add(new User("123", "123", "123", "123"));
+        }
+        Algorithm.SortUsers(users);
+        if (SearchQuery.Length != 0)
+        {
+            users = Algorithm.KMP(SearchQuery, users);
         }
         return base.OnInitializedAsync();
     }

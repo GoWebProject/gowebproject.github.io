@@ -78,9 +78,10 @@ namespace WebApplication.Models
         }
 
 
-        public static List<User> KMP(string needle, List<User> list)
+        public static List<User> KMP(string needle, IEnumerable<User> list)
         {
             var res = new List<User>();
+            if (needle.Length == 0) return res;
             var lps = prefix(needle);
             foreach (var t in list)
             {

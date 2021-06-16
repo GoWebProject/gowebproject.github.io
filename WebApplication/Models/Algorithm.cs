@@ -172,6 +172,8 @@ namespace WebApplication.Models
                 HeapSort(arr);
             else
                 MergeSort(arr, 0, arr.Count - 1);
+            arr.Reverse();
+                
         }
     }
 }

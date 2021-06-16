@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    public class Sorts
+    public static class Algorithm
     {
-        static void Merge(List<User> array,  int lowIndex, int middleIndex, int highIndex)
+        static void Merge(List<User> array, int lowIndex, int middleIndex, int highIndex)
         {
             int left = lowIndex;
             int right = middleIndex + 1;
@@ -47,19 +48,19 @@ namespace WebApplication.Models
                 array[lowIndex + i] = tempArray[i];
             }
         }
-        static List<User> MergeSort(List<User> array,  int lowIndex, int highIndex)
+
+        static void MergeSort(List<User> array, int lowIndex, int highIndex)
         {
             if (lowIndex < highIndex)
             {
                 var middleIndex = (lowIndex + highIndex) / 2;
-                MergeSort(array,  lowIndex, middleIndex);
-                MergeSort(array,  middleIndex + 1, highIndex);
-                Merge(array,  lowIndex, middleIndex, highIndex);
+                MergeSort(array, lowIndex, middleIndex);
+                MergeSort(array, middleIndex + 1, highIndex);
+                Merge(array, lowIndex, middleIndex, highIndex);
             }
-
-            return array;
         }
-        public void HeapSort(List<User> arr)
+
+        static void HeapSort(List<User> arr)
         {
             var n = arr.Count;
 
@@ -77,11 +78,76 @@ namespace WebApplication.Models
         }
 
 
-        void heapify(List<User> arr, int n, int i)
+        public static List<User> KMP(string needle, List<User> list)
+        {
+            var res = new List<User>();
+            var lps = prefix(needle);
+            foreach (var t in list)
+            {
+                var haystack = t.Username;
+                var j = 0;
+                for (var i = 0; i < haystack.Length;)
+                {
+                    if (needle[j] == haystack[i])
+                    {
+                        j++;
+                        i++;
+                    }
+
+                    if (j == needle.Length)
+                    {
+                        res.Add(t);
+                        break;
+                    }
+
+                    if (i >= haystack.Length || needle[j] == haystack[i]) continue;
+                    if (j != 0)
+                        j = lps[j - 1];
+                    else
+                        i += 1;
+                }
+            }
+
+            return res;
+        }
+
+        static int[] prefix(string pat)
+        {
+            var len = 0;
+            var pref = new int[pat.Length];
+            pref[0] = 0;
+            var i = 1;
+            while (i < pat.Length)
+            {
+                if (pat[i] == pat[len])
+                {
+                    len++;
+                    pref[i] = len;
+                    i++;
+                }
+                else
+                {
+                    if (len != 0)
+                    {
+                        len = pref[len - 1];
+                    }
+                    else
+                    {
+                        pref[i] = 0;
+                        i++;
+                    }
+                }
+            }
+
+            return pref;
+        }
+
+
+        static void heapify(List<User> arr, int n, int i)
         {
             var largest = i;
-            var  l = 2 * i + 1; 
-            var r = 2 * i + 2; 
+            var l = 2 * i + 1;
+            var r = 2 * i + 2;
 
             if (l < n && int.Parse(arr[l].RfgRating) > int.Parse(arr[largest].RfgRating))
                 largest = l;
@@ -98,13 +164,14 @@ namespace WebApplication.Models
                 heapify(arr, n, largest);
             }
         }
-        public void SortUsers (List<User> arr)
+
+        public static void SortUsers(List<User> arr)
         {
             Random rnd = new Random();
             if (rnd.Next() % 2 == 0)
                 HeapSort(arr);
             else
-                MergeSort(arr,0,arr.Count-1);
+                MergeSort(arr, 0, arr.Count - 1);
         }
     }
 }

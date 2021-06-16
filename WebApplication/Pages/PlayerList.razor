@@ -10,7 +10,11 @@
     <svg style="margin-right: 10px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
     </svg>
-    <input class="form-control mr-sm-2" type="text" @onchange="OnSearchBox_change" placeholder="Поиск игрока" aria-label="Search">
+    <div class="input-group">
+        <input type="search" class="form-control rounded" @bind="SearchQuery" placeholder="Поиск игрока..." aria-label="Search"
+               aria-describedby="search-addon"/>
+        <button type="button" style="margin-left: 10px" @onclick="OnSearchButton_press" class="btn btn-outline-primary">Поиск</button>
+    </div>
 </form>
 <table class="table table-striped">
     <thead>
@@ -96,6 +100,9 @@
     [Parameter]
     public string LoggedUsername { get; set; }
 
+    [Parameter]
+    public string SearchQuery { get; set; }
+
     private int i;
     private List<User> users;
     bool isAdmin;
@@ -113,10 +120,13 @@
         try
         {
             users = UserManager.GetUsers();
-            var sort = new Sorts();
-            sort.SortUsers(users);
+            Algorithm.SortUsers(users);
+            if (SearchQuery != null)
+            {
+                users = Algorithm.KMP(SearchQuery, users);
+            }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             users = new List<User>();
         }
@@ -148,9 +158,9 @@
         _navigationManager.NavigateTo("/PlayerList", true);
     }
 
-    void OnSearchBox_change(ChangeEventArgs ev)
+    void OnSearchButton_press()
     {
-        users.Add(new User("123","123","","123"));
+        _navigationManager.NavigateTo($"/PlayerList?query={SearchQuery}", true);
     }
 
 }

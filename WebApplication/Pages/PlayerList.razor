@@ -112,7 +112,9 @@
         isAdmin = curUser is { AccessLevel: 1 };
         try
         {
-            users = UserManager.GetUsers("rating desc");
+            users = UserManager.GetUsers();
+            var sort = new Sorts();
+            sort.SortUsers(users);
         }
         catch (Exception e)
         {

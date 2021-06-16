@@ -9,10 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Content Update="Pages\Account\Registration.razor">
         <DependentUpon>Registration.cshtml</DependentUpon>
       </Content>

@@ -100,7 +100,7 @@ body {
   color: rgb(255, 255, 255);
   font-size: 30%;
   opacity: 0;
-  animation: text 4s 1;
+  animation: text 2s 1;
   animation-fill-mode: forwards;
   position: absolute;
   top: 45%;
@@ -117,7 +117,7 @@ body {
   color: rgb(255, 255, 255);
   font-size: 20%;
   opacity: 0;
-  animation: text 4s 1;
+  animation: text 2s 1;
   animation-fill-mode: forwards;
 }
 
@@ -164,8 +164,8 @@ body {
 
   font-size: 30px;
   height: 5%;
-  animation: text2 2s;
-  animation-delay: 4s;
+  animation: text2 1s;
+  animation-delay: 2s;
   animation-fill-mode: forwards;
   animation-play-state: initial;
   cursor: pointer;
@@ -266,8 +266,8 @@ body {
   padding: 10px;
   border-radius: 12px;
   cursor: pointer;
-  animation: btn 4s;
-  animation-delay: 5s;
+  animation: btn 1s;
+  animation-delay: 2s;
   opacity: 0;
   animation-fill-mode: forwards;
 }

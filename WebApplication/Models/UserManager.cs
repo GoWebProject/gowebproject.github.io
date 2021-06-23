@@ -96,7 +96,10 @@ namespace WebApplication.Models
             var cmd = new MySqlCommand(
                 $"insert into accounts value(@username,@email,'{key}',@fullname,'{value}',{user.RfgRating},@miscrating,'{user.AccessLevel}')");
             cmd.Parameters.AddStringsWithValues(new[]
-                {"@username", user.Username, "@fullname", user.FullName, "@miscrating", user.MiscRating});
+            {
+                "@username", user.Username, "@fullname", user.FullName, "@email", user.Email, "@miscrating",
+                user.MiscRating
+            });
             dbase.InsertCommand(cmd);
             dbase.Close();
             return true;
@@ -108,7 +111,10 @@ namespace WebApplication.Models
             var cmd = new MySqlCommand(
                 $"update accounts set username=@username, email=@email,full_name=@fullname,rating={user.RfgRating},misc_ratings=@miscrating,access_level='{user.AccessLevel}' where username='{oldUsername}'");
             cmd.Parameters.AddStringsWithValues(new[]
-                {"@username", user.Username, "@fullname", user.FullName, "@miscrating", user.MiscRating});
+            {
+                "@username", user.Username, "@fullname", user.FullName, "@email", user.Email, "@miscrating",
+                user.MiscRating
+            });
             dbase.InsertCommand(cmd);
             dbase.Close();
             return true;

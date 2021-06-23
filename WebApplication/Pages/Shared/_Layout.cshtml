@@ -10,52 +10,64 @@
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
+@{ var label = Context.Request.Cookies["username"] == null ? "Вход или регистрация" : $"Здравствуй, {Context.Request.Cookies["username"]}"; }
+<header>
+    <div id="wrapper">
 
-    <header>
-        <div id="wrapper">
-
-            <div id="sign"><p onclick="document.location='../Account/Login.cshtml'" class="sign_up_or_in">Вход или Регистрация</p></div>
-            
-            <div id="sidebar">
-                <div class="toggle_btn" onclick="openMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-
-                <ul>
-                    <li>Меню</li>
-                    <li><p onclick="document.location='../Index'" class="menu">Главная</p></li>
-                    <li><p onclick="document.location='../Account/Profile'" class="menu">Профиль</p></li>
-                    <li><p onclick="document.location='../PlayerList'" class="menu">Список Игроков</p></li>
-                    <li><p onclick="document.location='../Navigation'" class="menu">Навигация</p></li>
-                </ul>
-            </div>
+        <div id="sign">
+            <p onclick="document.location='../Account/Login.cshtml'" class="sign_up_or_in">
+                @label
+            </p>
         </div>
 
-        <script>
+        <div id="sidebar">
+            <div class="toggle_btn" onclick="openMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul>
+                <li>Меню</li>
+                <li>
+                    <p onclick="document.location='../Index'" class="menu">Главная</p>
+                </li>
+                <li>
+                    <p onclick="document.location='../Account/Profile'" class="menu">Профиль</p>
+                </li>
+                <li>
+                    <p onclick="document.location='../PlayerList'" class="menu">Список Игроков</p>
+                </li>
+                <li>
+                    <p onclick="document.location='../Navigation'" class="menu">Навигация</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
             function openMenu(){
                 document.getElementById("sidebar").classList.toggle('active');
             }
         </script>
-        
-    </header>
+
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        &copy; 2021 - Клуб Го ДВФУ
     </div>
+</footer>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Клуб Го ДВФУ
-        </div>
-    </footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

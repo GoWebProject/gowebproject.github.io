@@ -9,9 +9,9 @@
 
 <form>
     <label for="login">Логин/Почта:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="_login" type="text" id="login"><br><br>
+    <input style="width: auto; " class="form-control input_user" @bind="_login" type="text" id="login" autocomplete="username"><br><br>
     <label for="password">Пароль:</label><br>
-    <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password"><br><br>
+    <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password" autocomplete="current-password"><br><br>
 </form>
 <button class="btn btn-primary" @onclick="OnSubmitButtonClick">Войти</button>
 <div class="mt-4">
@@ -26,6 +26,7 @@
 @code{
     private string _login;
     private string _pwd;
+
     private void OnSubmitButtonClick()
     {
         var user = UserManager.GetUser(_login, _pwd);
@@ -36,7 +37,8 @@
         else
         {
             CookieManager.WriteCookies(JsRuntime, "username", _login);
-            _navigationManager.NavigateTo("/Account/Profile",true);
+            _navigationManager.NavigateTo("/Account/Profile", true);
         }
     }
+
 }

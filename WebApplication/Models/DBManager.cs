@@ -16,24 +16,25 @@ namespace WebApplication.Models
             _mySqlConnection.Open() ;
         }
 
-        public MySqlDataReader GetReader(string cmd)
+        public MySqlDataReader GetReader(MySqlCommand cmd)
         {
-            _cachedReader = new MySqlCommand(cmd, _mySqlConnection).ExecuteReader();
+            cmd.Connection = _mySqlConnection;
+            _cachedReader = cmd.ExecuteReader();
             return _cachedReader;
         }
 
-        public void InsertCommand(string cmd)
+        public void InsertCommand(MySqlCommand cmd)
         {
-            var command = new MySqlCommand(cmd, _mySqlConnection);
-            _mySqlDataAdapter.InsertCommand = command;
-            command.ExecuteNonQuery();
-            command.Dispose();
+            cmd.Connection = _mySqlConnection;
+            _mySqlDataAdapter.InsertCommand = cmd;
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
         }
 
         public void Close()
         {
             _mySqlConnection.Close();
-            if(_cachedReader!=null)  _cachedReader.Close();
+            _cachedReader?.Close();
         }
     }
 }

@@ -65,7 +65,7 @@
         else
         {
             var change_user = false;
-            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (email.Contains('@')))
+            if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (email.Contains('@')) && checkRating())
             {
                 change_user = UserManager.ChangeUser(old_username, new User(username, email, "", fullname, rfgRating: rating, miscRating: misc_rating));
                 if (!change_user)

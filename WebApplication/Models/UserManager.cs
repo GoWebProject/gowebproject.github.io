@@ -46,7 +46,7 @@ namespace WebApplication.Models
         public static User GetUser(string username)
         {
             var dbase = new DBManager();
-            var cmd = new MySqlCommand("select * from accounts where username='@username'");
+            var cmd = new MySqlCommand("select * from accounts where username=@username");
             cmd.Parameters.AddWithValue("@username", username);
             var reader = dbase.GetReader(cmd);
             User user = null;
@@ -64,7 +64,7 @@ namespace WebApplication.Models
         public static bool UserExists(string username)
         {
             var dbase = new DBManager();
-            var cmd = new MySqlCommand("select username from accounts where username='@username'");
+            var cmd = new MySqlCommand("select username from accounts where username=@username");
             cmd.Parameters.AddWithValue("@username", username);
             var reader = dbase.GetReader(cmd);
             var rvalue = reader.Read();
@@ -94,7 +94,7 @@ namespace WebApplication.Models
             if (UserExists(user.Username)) return false;
             var (key, value) = GenerateHash(user.PasswordHash);
             var cmd = new MySqlCommand(
-                $"insert into accounts value('@username','@email','{key}','@fullname','{value}',{user.RfgRating},'@miscrating','{user.AccessLevel}')");
+                $"insert into accounts value(@username,@email,'{key}',@fullname,'{value}',{user.RfgRating},@miscrating,'{user.AccessLevel}')");
             cmd.Parameters.AddStringsWithValues(new[]
                 {"@username", user.Username, "@fullname", user.FullName, "@miscrating", user.MiscRating});
             dbase.InsertCommand(cmd);
@@ -106,7 +106,7 @@ namespace WebApplication.Models
         {
             var dbase = new DBManager();
             var cmd = new MySqlCommand(
-                $"update accounts set username='@username', email='@email',full_name='@fullname',rating={user.RfgRating},misc_ratings='@miscrating',access_level='{user.AccessLevel}' where username='{oldUsername}'");
+                $"update accounts set username=@username, email=@email,full_name=@fullname,rating={user.RfgRating},misc_ratings=@miscrating,access_level='{user.AccessLevel}' where username='{oldUsername}'");
             cmd.Parameters.AddStringsWithValues(new[]
                 {"@username", user.Username, "@fullname", user.FullName, "@miscrating", user.MiscRating});
             dbase.InsertCommand(cmd);
@@ -117,7 +117,7 @@ namespace WebApplication.Models
         public static bool DeleteUser(string username)
         {
             var dbase = new DBManager();
-            var cmd = new MySqlCommand("delete from accounts where username='@username'");
+            var cmd = new MySqlCommand("delete from accounts where username=@username");
             cmd.Parameters.AddWithValue("@username", username);
             dbase.InsertCommand(cmd);
             dbase.Close();
@@ -127,7 +127,7 @@ namespace WebApplication.Models
         public static bool ChangeUserPassword(string username, string pwd)
         {
             var dbase = new DBManager();
-            var cmd = new MySqlCommand("select salt from accounts where username='@username'");
+            var cmd = new MySqlCommand("select salt from accounts where username=@username");
             cmd.Parameters.AddWithValue("@username", username);
             var reader = dbase.GetReader(cmd);
             reader.Read();
@@ -135,7 +135,7 @@ namespace WebApplication.Models
             var hash = GenerateHashFromSalt(pwd, salt);
             dbase.Close();
             dbase = new DBManager();
-            cmd = new MySqlCommand("update accounts set pwd='{hash}' where username='@username'");
+            cmd = new MySqlCommand("update accounts set pwd='{hash}' where username=@username");
             cmd.Parameters.AddWithValue("@username", username);
             dbase.InsertCommand(cmd);
             dbase.Close();
@@ -145,7 +145,7 @@ namespace WebApplication.Models
         private static void AddStringsWithValues(this MySqlParameterCollection collection,
             IReadOnlyList<string> queries)
         {
-            for (var i = 0; i < queries.Count / 2; i += 2)
+            for (var i = 0; i < queries.Count; i += 2)
                 collection.AddWithValue(queries[i], queries[i + 1]);
         }
     }

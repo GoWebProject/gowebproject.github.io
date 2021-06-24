@@ -1,0 +1,69 @@
+@page
+@model WebApplication.Pages.Navigation
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навигация</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <div class="nav-page">
+        <div class="nav-header">
+            <div class="slider middle">
+
+                <div class="slides">
+                    <input type="radio" name="r" id="r1" checked>
+                    <input type="radio" name="r" id="r2" >
+                    <input type="radio" name="r" id="r3" >
+                    <input type="radio" name="r" id="r4" >
+
+                    <div class="slide s1"><img src="~/img/1.jpg" alt=""></div>
+                    <div class="slide"><img src="~/img/2.jpg" alt=""></div>
+                    <div class="slide"><img src="~/img/3.jpg" alt=""></div>
+                    <div class="slide"><img src="~/img/4.jpg" alt=""></div>
+                </div>
+            
+
+                <div class="navigation">
+                    <label for="r1" class="bar"></label>
+                    <label for="r2" class="bar"></label>
+                    <label for="r3" class="bar"></label>
+                    <label for="r4" class="bar"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="flexOut"><h1 id="click" onclick="document.location='Index'" >Вернуться назад</h1></div>
+
+        <div class="flex">
+            <h1>Настольная игра го</h1>
+            <p class="nav-text box1">В Го каждый человек может найти и проявить себя в полной мере. Для одних партия в Го — это радостный творческий процесс, для других — бескомпромиссная борьба, проверяющая волю и силу духа, для третьих — ритуальное действие и почти медитация. Но во всех случаях Го притягивает своей глубиной, таинственностью и головокружительной сложностью.</p>
+
+        </div>
+        <div class="flextext0"><h1> Виды слабых мест</h1></div>
+        <div class="flextext1">
+            
+            <p class="nav-text box2">Посмотрите на позицию. Как быстро оценить шансы на спасение двух черных с треугольниками? Посчитайте дыхания у них и у окружающих белых. Такой подсчет следует делать постоянно. У черных 2 дыхания. Белые разделены на две группы: у тройки 5 дыханий, а у двойки их 3. Если дыханий меньше, чем у противника, то скорее всего, вас съедят.</p>
+            <img class="img1" src="~/img/cartinka1.jpg" alt="Нехватка дыханий">
+        </div>
+
+        <div class="flextext2">
+            <p class="nav-text box3">Разрывы отмечены крестиками, дырка там, где кружок. Слабости соединений в группе позволяют противнику поставить туда свой камень и разделить ваши силы на части.</p>
+            <img src="~/img/cartinka2.jpg" alt="" class="img2">
+        </div>
+
+        <div class="flextext3">
+            <p class="nav-text box4">Разрывы отмечены крестиками, дырка там, где кружок. Слабости соединений в группе позволяют противнику поставить туда свой камень и разделить ваши силы на части.</p>
+            <img src="~/img/cartinka3.jpg" alt="" class="img3">
+        </div>
+    </div>
+</body>
+</html>

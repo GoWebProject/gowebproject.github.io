@@ -141,7 +141,7 @@ namespace WebApplication.Models
             var hash = GenerateHashFromSalt(pwd, salt);
             dbase.Close();
             dbase = new DBManager();
-            cmd = new MySqlCommand("update accounts set pwd='{hash}' where username=@username");
+            cmd = new MySqlCommand($"update accounts set pwd='{hash}' where username=@username");
             cmd.Parameters.AddWithValue("@username", username);
             dbase.InsertCommand(cmd);
             dbase.Close();

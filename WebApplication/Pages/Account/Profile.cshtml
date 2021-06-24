@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "Профиль";
 }
-<h1>@ViewData["Title"]</h1>
 
-<component type="typeof(Profile)" param-LoggedUsername="@Request.Cookies["username"]" render-mode="ServerPrerendered" />
-<script src="~/_framework/blazor.server.js"></script>
+<div class="white profile-page">
+    <h1>@ViewData["Title"]</h1>
+
+    <component type="typeof(Profile)" param-LoggedUsername="@Request.Cookies["username"]" render-mode="ServerPrerendered" />
+    <script src="~/_framework/blazor.server.js"></script>
+</div>

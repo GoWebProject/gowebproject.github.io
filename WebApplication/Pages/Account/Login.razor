@@ -9,7 +9,7 @@
 
 <div class="white">
     <form>
-        <label for="login">Логин/Почта:</label><br>
+        <label for="login">Логин:</label><br>
         <input style="width: auto; " class="form-control input_user" @bind="_login" type="text" id="login" autocomplete="username"><br><br>
         <label for="password">Пароль:</label><br>
         <input style="width: auto; " class="form-control input_user" @bind="_pwd" type="password" id="password" autocomplete="current-password"><br><br>
@@ -18,9 +18,6 @@
     <div class="mt-4">
         <div class="d-flex links">
             Нет аккаунта? <a href="/Account/Registration" class="ml-2">Регистрация</a>
-        </div>
-        <div class="d-flex links">
-            <a href="/Account/PasswordChange">Забыли пароль?</a>
         </div>
     </div>
 </div>

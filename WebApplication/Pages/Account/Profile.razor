@@ -39,6 +39,7 @@
     private string buttonLabel = "Изменить данные";
     private string rating = "";
     private string misc_rating = "";
+    private User user;
     private List<KeyValuePair<string, object>> readOnlyAttr = new() {new KeyValuePair<string, object>("readonly", "")};
     private List<KeyValuePair<string, object>> notReadOnlyAttr = new();
 
@@ -47,7 +48,7 @@
 
     protected override Task OnInitializedAsync()
     {
-        var user = UserManager.GetUser(LoggedUsername);
+        user = UserManager.GetUser(LoggedUsername);
         username = user.Username;
         old_username = username;
         fullname = user.FullName;
@@ -70,7 +71,8 @@
             var change_user = false;
             if ((username.Length > 0) && (fullname.Length > 0) && (email.Length > 0) && (email.Contains('@')) && checkRating())
             {
-                change_user = UserManager.ChangeUser(old_username, new User(username, email, "", fullname, rfgRating: rating, miscRating: misc_rating));
+
+                change_user = UserManager.ChangeUser(old_username, new User(username, email, "", fullname,level:user.AccessLevel, rfgRating: rating, miscRating: misc_rating));
                 if (!change_user)
                 {
                     JsRuntime.InvokeVoidAsync("alert", "Пользователь с таким именем есть");

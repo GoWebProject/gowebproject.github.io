@@ -11,7 +11,7 @@
     <form>
         <div readonly>
             <label for="name">Имя пользователя:</label><br>
-            <input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username"><br><br>
+            <input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username" readonly><br><br>
             <label for="secondname">Полное Имя:</label><br>
             <input style="width: auto;@(madeAttempt && fullname.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="fullname" type="text" id="fullname" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
             <label for="login">Почта:</label><br>
@@ -101,14 +101,8 @@
 
     private bool checkRating()
     {
-        foreach (var c in rating)
-        {
-            if (char.IsDigit(c))
-            {
-                return false;
-            }
-        }
-        return true;
+        int o;
+        return int.TryParse(rating, out o);
     }
 
 

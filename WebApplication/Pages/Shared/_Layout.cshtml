@@ -10,23 +10,22 @@
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
-@{ var label = Context.Request.Cookies["username"] == null ? "Вход или регистрация" : $"Здравствуй, {Context.Request.Cookies["username"]}"; }
+@{ var label = Context.Request.Cookies["username"] == null ? "Авторизация" : $"Здравствуй, {Context.Request.Cookies["username"]}"; }
+<div class="toggle_btn" onclick="openMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 <header>
     <div id="wrapper">
 
         <div id="sign">
-            <p onclick="document.location='../Account/Login.cshtml'" class="sign_up_or_in">
+            <p onclick="document.location='../Account/Login'" class="sign_up_or_in">
                 @label
             </p>
         </div>
 
         <div id="sidebar">
-            <div class="toggle_btn" onclick="openMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
             <ul>
                 <li>Меню</li>
                 <li>
@@ -39,7 +38,7 @@
                     <p onclick="document.location='../PlayerList'" class="menu">Список Игроков</p>
                 </li>
                 <li>
-                    <p onclick="document.location='../Navigation'" class="menu">Навигация</p>
+                    <p onclick="document.location='../Guide'" class="menu">Руководство</p>
                 </li>
             </ul>
         </div>
@@ -60,7 +59,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2021 - Клуб Го ДВФУ
+        <p class="copyright">&copy; 2021 - Клуб Го ДВФУ</p>
     </div>
 </footer>
 

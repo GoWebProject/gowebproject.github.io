@@ -7,24 +7,26 @@
 @inject IJSRuntime JsRuntime;
 @inject NavigationManager _navigationManager
 
-<form>
-    <div readonly>
-        <label for="name">Имя пользователя:</label><br>
-        <input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username"><br><br>
-        <label for="secondname">Полное Имя:</label><br>
-        <input style="width: auto;@(madeAttempt && fullname.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="fullname" type="text" id="fullname" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
-        <label for="login">Почта:</label><br>
-        <input style="width: auto; @(madeAttempt && email.Length == 0 && email.Contains('@') ? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
-        <label for="rating">РФГ рейтинг:</label><br>
-        <input style="width: auto;@(madeAttempt && !checkRating() ? "border-color:red;" : "")" class="form-control input_user" @bind="rating" type="text" id="rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
-        <label for="misc_racing">Другие рейтинги:</label><br>
-        <input style="width: auto; " class="form-control input_user" @bind="misc_rating" type="text" id="misc_rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+<div class="white">
+    <form>
+        <div readonly>
+            <label for="name">Имя пользователя:</label><br>
+            <input style="width: auto; @(madeAttempt && username.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="username" type="text" id="username"><br><br>
+            <label for="secondname">Полное Имя:</label><br>
+            <input style="width: auto;@(madeAttempt && fullname.Length == 0 ? "border-color:red;" : "");" class="form-control input_user" @bind="fullname" type="text" id="fullname" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+            <label for="login">Почта:</label><br>
+            <input style="width: auto; @(madeAttempt && email.Length == 0 && email.Contains('@') ? "border-color:red;" : "");" class="form-control input_user" @bind="email" type="text" id="email" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+            <label for="rating">РФГ рейтинг:</label><br>
+            <input style="width: auto;@(madeAttempt && !checkRating() ? "border-color:red;" : "")" class="form-control input_user" @bind="rating" type="text" id="rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+            <label for="misc_racing">Другие рейтинги:</label><br>
+            <input style="width: auto; " class="form-control input_user" @bind="misc_rating" type="text" id="misc_rating" @attributes="@(disable_fields ? readOnlyAttr : notReadOnlyAttr)"><br><br>
+        </div>
+    </form>
+    <div class="mt-4">
+        <a href="/Account/PasswordChange" class="ml-2">Сменить пароль</a>
     </div>
-</form>
-<div class="mt-4">
-    <a href="/Account/PasswordChange" class="ml-2">Сменить пароль</a>
+    <button class="btn btn-primary" @onclick="OnSubmitButtonClick">@buttonLabel</button>
 </div>
-<button class="btn btn-primary" @onclick="OnSubmitButtonClick">@buttonLabel</button>
 
 @code{
     private bool disable_fields = true;

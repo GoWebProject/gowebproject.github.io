@@ -7,7 +7,9 @@
 @{
     ViewData["Title"] = "Список Участников";
 }
-<h1 style="margin-bottom: 30px; margin-top: 20px">@ViewData["Title"]</h1>
+<div class="white">
+<h1 style="margin-bottom: 30px; align-self: flex-start;">@ViewData["Title"]</h1>
 
 <component type="typeof(PlayerList)" param-SearchQuery="@Request.Query["query"].ToString()" param-LoggedUsername="@Request.Cookies["username"]" render-mode="ServerPrerendered"/>
 <script src="~/_framework/blazor.server.js"></script>
+</div>

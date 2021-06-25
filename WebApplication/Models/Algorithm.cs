@@ -85,7 +85,7 @@ namespace WebApplication.Models
             var lps = prefix(needle);
             foreach (var t in list)
             {
-                var haystack = t.Username;
+                var haystack = t.FullName;
                 var j = 0;
                 for (var i = 0; i < haystack.Length;)
                 {

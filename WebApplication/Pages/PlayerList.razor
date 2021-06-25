@@ -147,7 +147,7 @@
             madeAttempt = true;
             if (RfgRating[cnt].Length != 0 && username[cnt].Length != 0)
             {
-                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username[cnt], rfgRating: RfgRating[cnt]));
+                UserManager.ChangeUser(u.Username, new User(u.Username, u.Email, "", username[cnt],level:u.AccessLevel, rfgRating: RfgRating[cnt]));
                 inChange[cnt] = false;
                 madeAttempt = false;
                 _navigationManager.NavigateTo("/PlayerList", true);
